@@ -18,4 +18,4 @@ jobs:
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
       - name: Run Playwright tests
-        run: yarn pwc --key ${{ secrets.CURRENTS_RECORD_KEY }} --project-id 2cI1I5 --ci-build-id
+        run: yarn pwc --key ${{ secrets.CURRENTS_RECORD_KEY }} --project-id ${{ secrets.CURRENTS_PROJECT_ID }} --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}
