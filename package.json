@@ -1,0 +1,21 @@
+{
+  "name": "github-actions-pw-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.0.2"
+  },
+  "devDependencies": {
+    "@currents/playwright": "^0.8.1",
+    "@playwright/test": "^1.38.1",
+    "@types/node": "^20.8.2",
+    "playwright": "^1.38.1"
+  }
+}
