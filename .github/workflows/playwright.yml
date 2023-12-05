@@ -23,4 +23,4 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: yarn pwc --key ${{ secrets.CURRENTS_RECORD_KEY }} --project-id ${{ secrets.CURRENTS_PROJECT_ID }} --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard ${{ matrix.shard }}
+      run: yarn pwc --key OGzz4AX4DzjE2DSA --project-id UA7nI9 --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard ${{ matrix.shard }}
