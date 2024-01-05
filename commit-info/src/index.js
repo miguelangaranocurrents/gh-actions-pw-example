@@ -15,7 +15,6 @@ const {
 const { getBranch, getCommitInfoFromEnvironment } = require("./utils");
 const Promise = require("bluebird");
 const { mergeWith, or } = require("ramda");
-const fs = require("fs");
 
 function commitInfo(folder) {
   folder = folder || process.cwd();

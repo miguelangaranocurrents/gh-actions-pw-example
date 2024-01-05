@@ -3,6 +3,7 @@ const debug = require("debug")("commit-info");
 const la = require("lazy-ass");
 const is = require("check-more-types");
 const Promise = require("bluebird");
+const fs = require("fs");
 
 // common git commands for getting basic info
 // https://git-scm.com/docs/git-show
