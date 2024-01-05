@@ -59,7 +59,7 @@ const runGitCommand = (gitCommand, pathToRepo) => {
 */
 const checkIfDetached = (branch) => (branch === "HEAD" ? null : branch);
 
-function getEventData(eventFilePath, isGha) {
+function getGhaEventData(eventFilePath, isGha) {
   let eventData = {};
   if (eventFilePath && isGha === "true") {
     const data = JSON.parse(fs.readFileSync(eventFilePath));
@@ -112,5 +112,5 @@ module.exports = {
   getTimestamp,
   getRemoteOrigin,
   gitCommands,
-  getEventData,
+  getGhaEventData,
 };

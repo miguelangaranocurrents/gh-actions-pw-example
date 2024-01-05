@@ -10,7 +10,7 @@ const {
   getSha,
   getTimestamp,
   getRemoteOrigin,
-  getEventData,
+  getGhaEventData,
 } = require("./git-api");
 const { getBranch, getCommitInfoFromEnvironment } = require("./utils");
 const Promise = require("bluebird");
@@ -28,7 +28,7 @@ function commitInfo(folder) {
     sha: getSha(folder),
     timestamp: getTimestamp(folder),
     remote: getRemoteOrigin(folder),
-    eventData: getEventData(
+    ghaEventData: getGhaEventData(
       process.env.GITHUB_EVENT_PATH,
       process.env.GITHUB_ACTIONS
     ),
