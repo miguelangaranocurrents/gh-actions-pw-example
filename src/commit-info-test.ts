@@ -6,3 +6,4 @@ const getCommitInfo = async () => {
 };
 
 getCommitInfo();
+//A change
