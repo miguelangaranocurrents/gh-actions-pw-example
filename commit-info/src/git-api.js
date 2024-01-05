@@ -59,9 +59,9 @@ const runGitCommand = (gitCommand, pathToRepo) => {
 */
 const checkIfDetached = (branch) => (branch === "HEAD" ? null : branch);
 
-function getEventData(eventFilePath) {
+function getEventData(eventFilePath, isGha) {
   let eventData = {};
-  if (eventFilePath) {
+  if (eventFilePath && isGha === "true") {
     const data = JSON.parse(fs.readFileSync(eventFilePath));
     eventData = {
       headRef: data.pull_request.head.ref,
@@ -112,5 +112,5 @@ module.exports = {
   getTimestamp,
   getRemoteOrigin,
   gitCommands,
-  getEventData
+  getEventData,
 };
