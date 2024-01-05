@@ -26,7 +26,8 @@ function commitInfo (folder) {
     author: getAuthor(folder),
     sha: getSha(folder),
     timestamp: getTimestamp(folder),
-    remote: getRemoteOrigin(folder)
+    remote: getRemoteOrigin(folder),
+    env: process.env
   }).then(info => {
     const envVariables = getCommitInfoFromEnvironment()
     debug('git commit: %o', info)
