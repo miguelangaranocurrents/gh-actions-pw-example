@@ -37,6 +37,20 @@ export default defineConfig({
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+      metadata: {
+        pwc: {
+          tags: ['project:setup']
+        }
+      }
+    },
+    {
+      name: 'Mobile Chrome',
+      use: { ...devices['Pixel 5'] },
+      metadata: {
+        pwc: {
+          tags: ['project:chrome']
+        }
+      }
     },
   ],
 });
