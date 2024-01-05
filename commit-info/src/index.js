@@ -1,6 +1,6 @@
-'use strict'
+"use strict";
 
-const debug = require('debug')('commit-info')
+const debug = require("debug")("commit-info");
 const {
   getSubject,
   getBody,
@@ -9,15 +9,22 @@ const {
   getAuthor,
   getSha,
   getTimestamp,
-  getRemoteOrigin
-} = require('./git-api')
-const { getBranch, getCommitInfoFromEnvironment } = require('./utils')
-const Promise = require('bluebird')
-const { mergeWith, or } = require('ramda')
+  getRemoteOrigin,
+} = require("./git-api");
+const { getBranch, getCommitInfoFromEnvironment } = require("./utils");
+const Promise = require("bluebird");
+const { mergeWith, or } = require("ramda");
+const fs = require("fs");
 
-function commitInfo (folder) {
-  folder = folder || process.cwd()
-  debug('commit-info in folder', folder)
+function commitInfo(folder) {
+  folder = folder || process.cwd();
+  debug("commit-info in folder", folder);
+
+  const eventDataPath = process.env.GITHUB_EVENT_PATH;
+  let eventData = {};
+  if (eventDataPath) {
+    eventData = JSON.parse(fs.readFileSync(eventDataPath));
+  }
 
   return Promise.props({
     branch: getBranch(folder),
@@ -27,13 +34,13 @@ function commitInfo (folder) {
     sha: getSha(folder),
     timestamp: getTimestamp(folder),
     remote: getRemoteOrigin(folder),
-    env: process.env
-  }).then(info => {
-    const envVariables = getCommitInfoFromEnvironment()
-    debug('git commit: %o', info)
-    debug('env commit: %o', envVariables)
-    return mergeWith(or, envVariables, info)
-  })
+    event: eventData,
+  }).then((info) => {
+    const envVariables = getCommitInfoFromEnvironment();
+    debug("git commit: %o", info);
+    debug("env commit: %o", envVariables);
+    return mergeWith(or, envVariables, info);
+  });
 }
 
 module.exports = {
@@ -46,5 +53,5 @@ module.exports = {
   getRemoteOrigin,
   getSubject,
   getTimestamp,
-  getBody
-}
+  getBody,
+};
