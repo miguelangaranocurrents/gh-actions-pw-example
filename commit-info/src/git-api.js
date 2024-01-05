@@ -60,7 +60,7 @@ const checkIfDetached = (branch) => (branch === "HEAD" ? null : branch);
 
 function getEventData(eventFilePath) {
   let eventData = {};
-  if (eventDataPath) {
+  if (eventFilePath) {
     const data = JSON.parse(fs.readFileSync(eventFilePath));
     eventData = {
       headRef: data.pull_request.head.ref,
