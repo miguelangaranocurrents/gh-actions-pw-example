@@ -1,0 +1,10 @@
+{
+  "name": "@currents/msw",
+  "version": "0.0.0",
+  "author": "Currents Software Inc",
+  "license": "GPL-3.0-or-later",
+  "scripts": {},
+  "devDependencies": {
+    "msw": "^2.0.11"
+  }
+}

@@ -10,11 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commit-info": "file:./commit-info",
     "typescript": "^5.0.2"
   },
   "devDependencies": {
-    "@currents/playwright": "^0.11.1",
+    "@currents/playwright": "file:./@currents/playwright",
     "@playwright/test": "^1.38.1",
     "@types/node": "^20.8.2",
     "playwright": "^1.38.1",

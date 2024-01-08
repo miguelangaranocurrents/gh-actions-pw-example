@@ -8,10 +8,10 @@ jobs:
   playwright-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     shard: [1/6, 2/6, 3/6, 4/6, 5/6, 6/6]
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1/6, 2/6, 3/6, 4/6, 5/6, 6/6]
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -19,11 +19,11 @@ jobs:
         node-version: 18
     - name: Install dependencies
       run: yarn install
-    # - name: Install Playwright browsers
-    #   run: npx playwright install --with-deps
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
 
-    # - name: Run Playwright tests
-    #   run: yarn pwc --key OGzz4AX4DzjE2DSA --project-id UA7nI9 --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard ${{ matrix.shard }}
+    - name: Run Playwright tests
+      run: yarn pwc --key OGzz4AX4DzjE2DSA --project-id UA7nI9 --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard ${{ matrix.shard }}
 
-    - name: Run commit info
-      run: yarn ts-node ./src/commit-info-test.ts
+    # - name: Run commit info
+    #   run: yarn ts-node ./src/commit-info-test.ts

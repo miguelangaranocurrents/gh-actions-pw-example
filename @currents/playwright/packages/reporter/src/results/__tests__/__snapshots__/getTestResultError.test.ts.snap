@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Getting error details should fetch error from 'beforeAll error.json' 1`] = `
+{
+  "codeFrame": {
+    "absoluteFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.error.spec.ts",
+    "column": 11,
+    "frame": "  4 | test.describe(title, function () {
+  5 |   test.beforeAll(async () => {
+> 6 |     throw new Error("beforeAll error");
+    |           ^
+  7 |   });
+  8 |   test(title, async function ({ page }) {
+  9 |     await page.goto("/");",
+    "language": "ts",
+    "line": 6,
+    "originalFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.error.spec.ts",
+    "relativeFile": null,
+  },
+  "message": "beforeAll error",
+  "name": "Error",
+  "stack": "Error: beforeAll error
+    at /Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.error.spec.ts:6:11",
+}
+`;
+
+exports[`Getting error details should fetch error from 'beforeAll timeout.json' 1`] = `
+{
+  "codeFrame": {
+    "absoluteFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+    "column": 8,
+    "frame": "  4 | const t = "beforeAll timeout";
+  5 | test.describe(t, function () {
+> 6 |   test.beforeAll(async () => {
+    |        ^
+  7 |     await wait(11000);
+  8 |   });
+  9 |   test(t, async function ({ page }) {",
+    "language": "ts",
+    "line": 6,
+    "originalFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+    "relativeFile": null,
+  },
+  "message": ""beforeAll" hook timeout of 1000ms exceeded.",
+  "name": "Error",
+  "stack": "[31m"beforeAll" hook timeout of 1000ms exceeded.[39m
+    at /Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts:6:8",
+}
+`;
+
+exports[`Getting error details should fetch error from 'beforeEach error.json' 1`] = `
+{
+  "codeFrame": {
+    "absoluteFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeEach.error.spec.ts",
+    "column": 11,
+    "frame": "  3 | test.describe(t, function () {
+  4 |   test.beforeEach(async () => {
+> 5 |     throw new Error("beforeEach error");
+    |           ^
+  6 |   });
+  7 |   test(t, async function ({ page }) {
+  8 |     await page.goto("/");",
+    "language": "ts",
+    "line": 5,
+    "originalFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeEach.error.spec.ts",
+    "relativeFile": null,
+  },
+  "message": "beforeEach error",
+  "name": "Error",
+  "stack": "Error: beforeEach error
+    at /Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeEach.error.spec.ts:5:11",
+}
+`;
+
+exports[`Getting error details should fetch error from 'beforeEach timeout.json' 1`] = `
+{
+  "codeFrame": {
+    "absoluteFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeEach.timeout.spec.ts",
+    "column": 8,
+    "frame": "  4 | const t = "beforeEach timeout";
+  5 | test.describe(t, function () {
+> 6 |   test.beforeEach(async () => {
+    |        ^
+  7 |     await wait(11000);
+  8 |   });
+  9 |   test(t, async function ({ page }) {",
+    "language": "ts",
+    "line": 6,
+    "originalFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeEach.timeout.spec.ts",
+    "relativeFile": null,
+  },
+  "message": "Test timeout of 1000ms exceeded while running "beforeEach" hook.",
+  "name": "Error",
+  "stack": "[31mTest timeout of 1000ms exceeded while running "beforeEach" hook.[39m
+    at /Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeEach.timeout.spec.ts:6:8",
+}
+`;
+
+exports[`Getting error details should fetch error from 'expect timeout.json' 1`] = `
+{
+  "codeFrame": {
+    "absoluteFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/test.timeout.spec.ts",
+    "column": 24,
+    "frame": "  13 |     test.setTimeout(5 * 60 * 1000);
+  14 |     await page.goto("/");
+> 15 |     await expect(page).toHaveTitle(/42/);
+     |                        ^
+  16 |   });
+  17 | });
+  18 |",
+    "language": "ts",
+    "line": 15,
+    "originalFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/test.timeout.spec.ts",
+    "relativeFile": null,
+  },
+  "message": "Timed out 5000ms waiting for expect(received).toHaveTitle(expected)
+
+Expected pattern: /42/
+Received string:  ""
+Call log:
+  - expect.toHaveTitle with timeout 5000ms
+  - waiting for locator(':root')
+  -   locator resolved to <html>…</html>
+  -   unexpected value ""
+  -   locator resolved to <html>…</html>
+  -   unexpected value ""
+  -   locator resolved to <html>…</html>
+  -   unexpected value ""
+  -   locator resolved to <html>…</html>
+  -   unexpected value ""
+  -   locator resolved to <html>…</html>
+  -   unexpected value ""
+  -   locator resolved to <html>…</html>
+  -   unexpected value ""
+  -   locator resolved to <html>…</html>
+  -   unexpected value ""
+  -   locator resolved to <html>…</html>
+  -   unexpected value ""
+  -   locator resolved to <html>…</html>
+  -   unexpected value ""
+",
+  "name": "Error",
+  "stack": "Error: [31mTimed out 5000ms waiting for [39m[2mexpect([22m[31mreceived[39m[2m).[22mtoHaveTitle[2m([22m[32mexpected[39m[2m)[22m
+
+Expected pattern: [32m/42/[39m
+Received string:  [31m""[39m
+Call log:
+  [2m- expect.toHaveTitle with timeout 5000ms[22m
+[2m  - waiting for locator(':root')[22m
+[2m  -   locator resolved to <html>…</html>[22m
+[2m  -   unexpected value ""[22m
+[2m  -   locator resolved to <html>…</html>[22m
+[2m  -   unexpected value ""[22m
+[2m  -   locator resolved to <html>…</html>[22m
+[2m  -   unexpected value ""[22m
+[2m  -   locator resolved to <html>…</html>[22m
+[2m  -   unexpected value ""[22m
+[2m  -   locator resolved to <html>…</html>[22m
+[2m  -   unexpected value ""[22m
+[2m  -   locator resolved to <html>…</html>[22m
+[2m  -   unexpected value ""[22m
+[2m  -   locator resolved to <html>…</html>[22m
+[2m  -   unexpected value ""[22m
+[2m  -   locator resolved to <html>…</html>[22m
+[2m  -   unexpected value ""[22m
+[2m  -   locator resolved to <html>…</html>[22m
+[2m  -   unexpected value ""[22m
+
+    at /Users/agoldis/currents-playwright/apps/e2e/errorDetails/test.timeout.spec.ts:15:24",
+}
+`;
+
+exports[`Getting error details should fetch error from 'global timeout A.json' 1`] = `
+{
+  "codeFrame": undefined,
+  "message": "Test interrupted",
+  "name": "Error",
+  "stack": "",
+}
+`;
+
+exports[`Getting error details should fetch error from 'global timeout B.json' 1`] = `null`;
+
+exports[`Getting error details should fetch error from 'global timeout explicitly skipped test.json' 1`] = `null`;

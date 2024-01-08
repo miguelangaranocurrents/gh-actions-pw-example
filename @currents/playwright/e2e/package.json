@@ -1,0 +1,19 @@
+{
+  "name": "@currents/e2e",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@currents/msw": "*",
+    "@playwright/test": "*",
+    "@types/node-ipc": "^9.2.3",
+    "execa": "^5.1.1",
+    "node-ipc": "10.1.0"
+  },
+  "main": "index.js",
+  "description": ""
+}
