@@ -1,0 +1,43 @@
+{
+  "name": "currents-playwright",
+  "version": "0.0.0",
+  "description": "",
+  "private": true,
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "e2e"
+  ],
+  "keywords": [
+    "playwright",
+    "cloud dashboard",
+    "reporter",
+    "tests reporter",
+    "cypress",
+    "ci"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "release": "npm run release --workspace @currents/playwright",
+    "publish": "npm run publish:npm --workspace @currents/playwright"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.40.1",
+    "eslint-config-custom": "*",
+    "prettier": "latest",
+    "turbo": "^1.10.16"
+  },
+  "release-it": {
+    "git": {
+      "requireCleanWorkingDir": false
+    }
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

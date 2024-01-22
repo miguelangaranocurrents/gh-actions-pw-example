@@ -1,0 +1,12 @@
+{
+  "name": "@currents/e2e-max-failures",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "npx playwright test -c ./playwright.config.ts",
+    "test:pw": "_CURRENTS_E2E_TESTS=1 npx playwright test -c ./playwright.config.e2e.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

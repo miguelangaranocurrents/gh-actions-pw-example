@@ -1,0 +1,37 @@
+{
+  "name": "@currents/pwc-scanner",
+  "version": "0.0.0",
+  "author": "Currents Software Inc",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "test": "jest",
+    "rm": "rimraf dist",
+    "lint": "TIMING=1 eslint \"**/*.ts*\"",
+    "build": "tsup-node --minify --dts",
+    "dev": "tsup-node --watch --dts"
+  },
+  "bin": {
+    "pwc-scanner": "./dist/bin/index.js"
+  },
+  "dependencies": {
+    "@currents/pwc-parser": "*",
+    "arg": "^5.0.2",
+    "debug": "^4.3.4",
+    "execa": "^8.0.1",
+    "source-map-support": "^0.5.21"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.38.1",
+    "typescript": "^5.2.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  }
+}

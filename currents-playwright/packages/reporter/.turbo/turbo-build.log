@@ -1,0 +1,30 @@
+$ tsup-node --minify --dts
+CLI Building entry: src/index.ts, src/bin/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v6.7.0
+CLI Using tsup config: /Users/miguelangarano/Documents/GitHub/currents-playwright/packages/reporter/tsup.config.ts
+CLI Target: esnext
+CLI Cleaning output folder
+CJS Build start
+
+ WARN  [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mUsing direct eval with a bundler is not recommended and may cause problems[0m [direct-eval]
+
+    ../scanner/src/index.ts:14:27:
+[37m      14 │   const { execa } = (await [32meval[37m('import("execa")')) as Promise<
+         ╵                            [32m~~~~[0m
+
+  You can read more about direct eval and bundling here: [4mhttps://esbuild.github.io/link/direct-eval[0m
+
+
+
+CJS dist/bin/index.js.LEGAL.txt 0 B
+CJS dist/index.js.LEGAL.txt     1.17 KB
+CJS dist/index.js               52.32 KB
+CJS dist/bin/index.js           15.22 KB
+CJS dist/index.js.map           202.02 KB
+CJS dist/bin/index.js.map       50.68 KB
+CJS ⚡️ Build success in 46ms
+DTS Build start
+DTS ⚡️ Build success in 2211ms
+DTS dist/bin/index.d.ts 21.00 B
+DTS dist/index.d.ts     2.65 KB

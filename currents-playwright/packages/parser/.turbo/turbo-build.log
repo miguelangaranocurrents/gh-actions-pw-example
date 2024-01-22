@@ -1,0 +1,15 @@
+$ tsup-node --minify --dts
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v6.7.0
+CLI Using tsup config: /Users/miguelangarano/Documents/GitHub/currents-playwright/packages/parser/tsup.config.ts
+CLI Target: esnext
+CLI Cleaning output folder
+CJS Build start
+CJS dist/index.js.LEGAL.txt 0 B
+CJS dist/index.js           837.00 B
+CJS dist/index.js.map       1.61 KB
+CJS ⚡️ Build success in 10ms
+DTS Build start
+DTS ⚡️ Build success in 963ms
+DTS dist/index.d.ts 192.00 B

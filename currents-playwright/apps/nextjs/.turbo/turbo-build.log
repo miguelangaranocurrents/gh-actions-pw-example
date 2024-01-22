@@ -1,0 +1,29 @@
+$ next build
+ ⚠ Invalid next.config.js options detected: 
+ ⚠     The value at .experimental has an unexpected property, transpilePackages, which is not in the list of allowed properties (appDocumentPreloading, adjustFontFallbacks, adjustFontFallbacksWithSizeAdjust, allowedRevalidateHeaderKeys, amp, clientRouterFilter, clientRouterFilterRedirects, clientRouterFilterAllowedRate, cpus, memoryBasedWorkersCount, craCompat, caseSensitiveRoutes, useDeploymentId, useDeploymentIdServerActions, deploymentId, disableOptimizedLoading, disablePostcssPresetEnv, esmExternals, serverActions, serverActionsBodySizeLimit, extensionAlias, externalDir, externalMiddlewareRewritesResolve, fallbackNodePolyfills, fetchCacheKeyPrefix, forceSwcTransforms, fullySpecified, gzipSize, incrementalCacheHandlerPath, isrFlushToDisk, isrMemoryCacheSize, largePageDataBytes, manualClientBasePath, middlewarePrefetch, nextScriptWorkers, optimizeCss, optimisticClientCache, outputFileTracingRoot, outputFileTracingExcludes, outputFileTracingIgnores, outputFileTracingIncludes, ppr, proxyTimeout, serverComponentsExternalPackages, scrollRestoration, sri, strictNextHead, swcMinify, swcPlugins, swcTraceProfiling, urlImports, workerThreads, webVitalsAttribution, mdxRs, typedRoutes, webpackBuildWorker, turbo, optimizePackageImports, optimizeServerReact, instrumentationHook, turbotrace, logging, serverMinification, serverSourceMaps, bundlePagesExternals).
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ⚠ `transpilePackages` has been moved out of `experimental`. Please update your next.config.js file accordingly.
+   Linting and checking validity of types ...
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Collecting page data ...
+   Generating static pages (0/4) ...
+   Generating static pages (1/4) 
+   Generating static pages (2/4) 
+   Generating static pages (3/4) 
+ ✓ Generating static pages (4/4) 
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (pages)                              Size     First Load JS
+┌ ○ /                                      2.6 kB         81.7 kB
+├ ○ /404                                   181 B          79.3 kB
+└ ○ /about                                 275 B          79.4 kB
++ First Load JS shared by all              79.1 kB
+  ├ chunks/framework-4561343f9e469ae9.js   45.3 kB
+  ├ chunks/main-a46041cdf2d2ff22.js        32.8 kB
+  ├ chunks/pages/_app-f29ca7eaa04984ee.js  204 B
+  └ chunks/webpack-fd8027ecb5121007.js     770 B
+
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+

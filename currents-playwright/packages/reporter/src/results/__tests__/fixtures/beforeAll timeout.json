@@ -1,0 +1,499 @@
+{
+  "title": "beforeAll timeout",
+  "_only": false,
+  "_requireFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+  "results": [
+    {
+      "retry": 0,
+      "parallelIndex": 0,
+      "workerIndex": 0,
+      "duration": 2,
+      "startTime": "2023-08-23T08:32:51.698Z",
+      "stdout": [],
+      "stderr": [],
+      "attachments": [],
+      "status": "timedOut",
+      "steps": [
+        {
+          "title": "Before Hooks",
+          "category": "hook",
+          "startTime": "2023-08-23T08:32:51.700Z",
+          "duration": -1,
+          "steps": [
+            {
+              "title": "beforeAll hook",
+              "parent": "[Circular]",
+              "category": "hook",
+              "startTime": "2023-08-23T08:32:51.701Z",
+              "duration": -1,
+              "steps": [],
+              "location": {
+                "file": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+                "line": 6,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "title": "After Hooks",
+          "category": "hook",
+          "startTime": "2023-08-23T08:32:52.701Z",
+          "duration": 2,
+          "steps": []
+        }
+      ],
+      "errors": [
+        {
+          "message": "\u001b[31m\"beforeAll\" hook timeout of 1000ms exceeded.\u001b[39m",
+          "stack": "\u001b[31m\"beforeAll\" hook timeout of 1000ms exceeded.\u001b[39m\n    at /Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts:6:8",
+          "location": {
+            "file": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+            "column": 8,
+            "line": 6
+          },
+          "snippet": "\u001b[0m \u001b[90m 4 |\u001b[39m \u001b[36mconst\u001b[39m t \u001b[33m=\u001b[39m \u001b[32m\"beforeAll timeout\"\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 5 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(t\u001b[33m,\u001b[39m \u001b[36mfunction\u001b[39m () {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeAll(\u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m wait(\u001b[35m11000\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 8 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 9 |\u001b[39m   test(t\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m \u001b[36mfunction\u001b[39m ({ page }) {\u001b[0m"
+        }
+      ],
+      "error": {
+        "message": "\u001b[31m\"beforeAll\" hook timeout of 1000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31m\"beforeAll\" hook timeout of 1000ms exceeded.\u001b[39m\n    at /Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts:6:8",
+        "location": {
+          "file": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+          "column": 8,
+          "line": 6
+        },
+        "snippet": "\u001b[0m \u001b[90m 4 |\u001b[39m \u001b[36mconst\u001b[39m t \u001b[33m=\u001b[39m \u001b[32m\"beforeAll timeout\"\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 5 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(t\u001b[33m,\u001b[39m \u001b[36mfunction\u001b[39m () {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeAll(\u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m wait(\u001b[35m11000\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 8 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 9 |\u001b[39m   test(t\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m \u001b[36mfunction\u001b[39m ({ page }) {\u001b[0m"
+      }
+    }
+  ],
+  "location": {
+    "file": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+    "line": 9,
+    "column": 7
+  },
+  "parent": {
+    "title": "beforeAll timeout",
+    "_only": false,
+    "_requireFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+    "location": {
+      "file": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+      "line": 5,
+      "column": 6
+    },
+    "parent": {
+      "title": "errorDetails/beforeAll.timeout.spec.ts",
+      "_only": false,
+      "_requireFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+      "location": {
+        "file": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+        "line": 0,
+        "column": 0
+      },
+      "parent": {
+        "title": "chromium",
+        "_only": false,
+        "_requireFile": "",
+        "parent": {
+          "title": "",
+          "_only": false,
+          "_requireFile": "",
+          "_use": [],
+          "_entries": ["[Circular]"],
+          "_hooks": [],
+          "_staticAnnotations": [],
+          "_modifiers": [],
+          "_parallelMode": "none",
+          "_type": "root"
+        },
+        "_use": [],
+        "_entries": ["[Circular]"],
+        "_hooks": [],
+        "_staticAnnotations": [],
+        "_modifiers": [],
+        "_parallelMode": "none",
+        "_fullProject": {
+          "project": {
+            "grep": {},
+            "grepInvert": null,
+            "outputDir": "/Users/agoldis/currents-playwright/apps/e2e/test-results",
+            "repeatEach": 1,
+            "retries": 0,
+            "name": "chromium",
+            "testDir": "/Users/agoldis/currents-playwright/apps/e2e",
+            "snapshotDir": "/Users/agoldis/currents-playwright/apps/e2e",
+            "testIgnore": [],
+            "testMatch": "errorDetails/*.ts",
+            "timeout": 1000,
+            "use": {
+              "baseURL": "http://localhost:3000",
+              "actionTimeout": 0,
+              "trace": "off",
+              "video": "off",
+              "screenshot": "off",
+              "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.82 Safari/537.36",
+              "viewport": { "width": 1280, "height": 720 },
+              "screen": { "width": 1920, "height": 1080 },
+              "deviceScaleFactor": 1,
+              "isMobile": false,
+              "hasTouch": false,
+              "defaultBrowserType": "chromium"
+            },
+            "dependencies": [],
+            "__projectId": "chromium"
+          },
+          "fullConfig": {
+            "config": {
+              "configFile": "/Users/agoldis/currents-playwright/apps/e2e/pw.config.errorDetails.ts",
+              "rootDir": "/Users/agoldis/currents-playwright/apps/e2e",
+              "forbidOnly": false,
+              "fullyParallel": false,
+              "globalSetup": null,
+              "globalTeardown": null,
+              "globalTimeout": 0,
+              "grep": {},
+              "grepInvert": null,
+              "maxFailures": 0,
+              "metadata": { "actualWorkers": 1 },
+              "preserveOutput": "always",
+              "reporter": [
+                [
+                  "/Users/agoldis/currents-playwright/packages/reporter/dist/index.js",
+                  {
+                    "ciBuildId": "1692779571318",
+                    "recordKey": "KPEvZL0LDYzcZH3U",
+                    "projectId": "bnsqNa"
+                  }
+                ]
+              ],
+              "reportSlowTests": { "max": 5, "threshold": 15000 },
+              "quiet": false,
+              "projects": [
+                {
+                  "grep": {},
+                  "grepInvert": null,
+                  "outputDir": "/Users/agoldis/currents-playwright/apps/e2e/test-results",
+                  "repeatEach": 1,
+                  "retries": 0,
+                  "name": "chromium",
+                  "testDir": "/Users/agoldis/currents-playwright/apps/e2e",
+                  "snapshotDir": "/Users/agoldis/currents-playwright/apps/e2e",
+                  "testIgnore": [],
+                  "testMatch": "errorDetails/*.ts",
+                  "timeout": 1000,
+                  "use": {
+                    "baseURL": "http://localhost:3000",
+                    "actionTimeout": 0,
+                    "trace": "off",
+                    "video": "off",
+                    "screenshot": "off",
+                    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.82 Safari/537.36",
+                    "viewport": { "width": 1280, "height": 720 },
+                    "screen": { "width": 1920, "height": 1080 },
+                    "deviceScaleFactor": 1,
+                    "isMobile": false,
+                    "hasTouch": false,
+                    "defaultBrowserType": "chromium"
+                  },
+                  "dependencies": [],
+                  "__projectId": "chromium"
+                }
+              ],
+              "shard": null,
+              "updateSnapshots": "missing",
+              "version": "1.37.1",
+              "workers": 1,
+              "webServer": null
+            },
+            "globalOutputDir": "/Users/agoldis/currents-playwright/apps/e2e",
+            "configDir": "/Users/agoldis/currents-playwright/apps/e2e",
+            "configCLIOverrides": {},
+            "storeDir": "/Users/agoldis/currents-playwright/apps/e2e/playwright",
+            "ignoreSnapshots": false,
+            "webServers": [],
+            "plugins": [],
+            "projects": ["[Circular]"],
+            "cliArgs": ["./errorDetails/beforeAll.timeout.spec.ts"],
+            "cliListOnly": false,
+            "cliPassWithNoTests": false,
+            "defineConfigWasUsed": true
+          },
+          "expect": {},
+          "respectGitIgnore": true,
+          "snapshotPathTemplate": "{snapshotDir}/{testFileDir}/{testFileName}-snapshots/{arg}{-projectName}{-snapshotSuffix}{ext}",
+          "id": "chromium",
+          "deps": []
+        },
+        "_type": "project"
+      },
+      "_use": [],
+      "_entries": ["[Circular]"],
+      "_hooks": [],
+      "_staticAnnotations": [],
+      "_modifiers": [],
+      "_parallelMode": "none",
+      "_fileId": "8912437a35b1a0ae8c7d",
+      "_type": "file"
+    },
+    "_use": [],
+    "_entries": [
+      {
+        "title": "beforeAll timeout",
+        "_only": false,
+        "_requireFile": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+        "results": [
+          {
+            "retry": 0,
+            "parallelIndex": 0,
+            "workerIndex": 0,
+            "duration": 2,
+            "startTime": "2023-08-23T08:32:51.698Z",
+            "stdout": [],
+            "stderr": [],
+            "attachments": [],
+            "status": "timedOut",
+            "steps": [
+              {
+                "title": "Before Hooks",
+                "category": "hook",
+                "startTime": "2023-08-23T08:32:51.700Z",
+                "duration": -1,
+                "steps": [
+                  {
+                    "title": "beforeAll hook",
+                    "parent": "[Circular]",
+                    "category": "hook",
+                    "startTime": "2023-08-23T08:32:51.701Z",
+                    "duration": -1,
+                    "steps": [],
+                    "location": {
+                      "file": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+                      "line": 6,
+                      "column": 8
+                    }
+                  }
+                ]
+              },
+              {
+                "title": "After Hooks",
+                "category": "hook",
+                "startTime": "2023-08-23T08:32:52.701Z",
+                "duration": 2,
+                "steps": []
+              }
+            ],
+            "errors": [
+              {
+                "message": "\u001b[31m\"beforeAll\" hook timeout of 1000ms exceeded.\u001b[39m",
+                "stack": "\u001b[31m\"beforeAll\" hook timeout of 1000ms exceeded.\u001b[39m\n    at /Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts:6:8",
+                "location": {
+                  "file": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+                  "column": 8,
+                  "line": 6
+                },
+                "snippet": "\u001b[0m \u001b[90m 4 |\u001b[39m \u001b[36mconst\u001b[39m t \u001b[33m=\u001b[39m \u001b[32m\"beforeAll timeout\"\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 5 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(t\u001b[33m,\u001b[39m \u001b[36mfunction\u001b[39m () {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeAll(\u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m wait(\u001b[35m11000\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 8 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 9 |\u001b[39m   test(t\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m \u001b[36mfunction\u001b[39m ({ page }) {\u001b[0m"
+              }
+            ],
+            "error": {
+              "message": "\u001b[31m\"beforeAll\" hook timeout of 1000ms exceeded.\u001b[39m",
+              "stack": "\u001b[31m\"beforeAll\" hook timeout of 1000ms exceeded.\u001b[39m\n    at /Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts:6:8",
+              "location": {
+                "file": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+                "column": 8,
+                "line": 6
+              },
+              "snippet": "\u001b[0m \u001b[90m 4 |\u001b[39m \u001b[36mconst\u001b[39m t \u001b[33m=\u001b[39m \u001b[32m\"beforeAll timeout\"\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 5 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(t\u001b[33m,\u001b[39m \u001b[36mfunction\u001b[39m () {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeAll(\u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m wait(\u001b[35m11000\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 8 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 9 |\u001b[39m   test(t\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m \u001b[36mfunction\u001b[39m ({ page }) {\u001b[0m"
+            }
+          }
+        ],
+        "location": {
+          "file": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+          "line": 9,
+          "column": 7
+        },
+        "parent": "[Circular]",
+        "expectedStatus": "passed",
+        "timeout": 1000,
+        "annotations": [],
+        "retries": 0,
+        "repeatEachIndex": 0,
+        "_testType": {
+          "fixtures": [
+            {
+              "fixtures": {
+                "defaultBrowserType": [
+                  "chromium",
+                  { "scope": "worker", "option": true }
+                ],
+                "browserName": [null, { "scope": "worker", "option": true }],
+                "playwright": [null, { "scope": "worker", "_hideStep": true }],
+                "headless": [null, { "scope": "worker", "option": true }],
+                "channel": [null, { "scope": "worker", "option": true }],
+                "launchOptions": [{}, { "scope": "worker", "option": true }],
+                "connectOptions": [null, { "scope": "worker", "option": true }],
+                "screenshot": ["off", { "scope": "worker", "option": true }],
+                "video": ["off", { "scope": "worker", "option": true }],
+                "trace": ["off", { "scope": "worker", "option": true }],
+                "_artifactsDir": [
+                  null,
+                  { "scope": "worker", "_title": "playwright configuration" }
+                ],
+                "_browserOptions": [null, { "scope": "worker", "auto": true }],
+                "browser": [null, { "scope": "worker", "timeout": 0 }],
+                "acceptDownloads": [null, { "option": true }],
+                "bypassCSP": [null, { "option": true }],
+                "colorScheme": [null, { "option": true }],
+                "deviceScaleFactor": [null, { "option": true }],
+                "extraHTTPHeaders": [null, { "option": true }],
+                "geolocation": [null, { "option": true }],
+                "hasTouch": [null, { "option": true }],
+                "httpCredentials": [null, { "option": true }],
+                "ignoreHTTPSErrors": [null, { "option": true }],
+                "isMobile": [null, { "option": true }],
+                "javaScriptEnabled": [null, { "option": true }],
+                "locale": [null, { "option": true }],
+                "offline": [null, { "option": true }],
+                "permissions": [null, { "option": true }],
+                "proxy": [null, { "option": true }],
+                "storageState": [null, { "option": true }],
+                "timezoneId": [null, { "option": true }],
+                "userAgent": [null, { "option": true }],
+                "viewport": [null, { "option": true }],
+                "actionTimeout": [0, { "option": true }],
+                "testIdAttribute": ["data-testid", { "option": true }],
+                "navigationTimeout": [0, { "option": true }],
+                "baseURL": [null, { "option": true }],
+                "serviceWorkers": [null, { "option": true }],
+                "contextOptions": [{}, { "option": true }],
+                "_setupContextOptions": [
+                  null,
+                  {
+                    "auto": "all-hooks-included",
+                    "_title": "context configuration"
+                  }
+                ],
+                "_setupArtifacts": [
+                  null,
+                  { "auto": "all-hooks-included", "_title": "trace recording" }
+                ],
+                "_contextFactory": [
+                  null,
+                  { "scope": "test", "_title": "context" }
+                ],
+                "_contextReuseMode": "none",
+                "_reuseContext": [
+                  null,
+                  { "scope": "test", "_title": "context" }
+                ]
+              },
+              "location": {
+                "file": "/Users/agoldis/currents-playwright/node_modules/@playwright/test/lib/index.js",
+                "line": 945,
+                "column": 24
+              }
+            }
+          ]
+        },
+        "id": "8912437a35b1a0ae8c7d-85d0c8b97a289fdb54e8",
+        "_poolDigest": "cfd73f6bd5773dfaf7337e872694d256e6c6a62c",
+        "_workerHash": "chromium-cfd73f6bd5773dfaf7337e872694d256e6c6a62c-0",
+        "_projectId": "chromium",
+        "_staticAnnotations": []
+      }
+    ],
+    "_hooks": [
+      {
+        "type": "beforeAll",
+        "location": {
+          "file": "/Users/agoldis/currents-playwright/apps/e2e/errorDetails/beforeAll.timeout.spec.ts",
+          "line": 6,
+          "column": 8
+        }
+      }
+    ],
+    "_staticAnnotations": [],
+    "_modifiers": [],
+    "_parallelMode": "none",
+    "_fileId": "8912437a35b1a0ae8c7d",
+    "_type": "describe"
+  },
+  "expectedStatus": "passed",
+  "timeout": 1000,
+  "annotations": [],
+  "retries": 0,
+  "repeatEachIndex": 0,
+  "_testType": {
+    "fixtures": [
+      {
+        "fixtures": {
+          "defaultBrowserType": [
+            "chromium",
+            { "scope": "worker", "option": true }
+          ],
+          "browserName": [null, { "scope": "worker", "option": true }],
+          "playwright": [null, { "scope": "worker", "_hideStep": true }],
+          "headless": [null, { "scope": "worker", "option": true }],
+          "channel": [null, { "scope": "worker", "option": true }],
+          "launchOptions": [{}, { "scope": "worker", "option": true }],
+          "connectOptions": [null, { "scope": "worker", "option": true }],
+          "screenshot": ["off", { "scope": "worker", "option": true }],
+          "video": ["off", { "scope": "worker", "option": true }],
+          "trace": ["off", { "scope": "worker", "option": true }],
+          "_artifactsDir": [
+            null,
+            { "scope": "worker", "_title": "playwright configuration" }
+          ],
+          "_browserOptions": [null, { "scope": "worker", "auto": true }],
+          "browser": [null, { "scope": "worker", "timeout": 0 }],
+          "acceptDownloads": [null, { "option": true }],
+          "bypassCSP": [null, { "option": true }],
+          "colorScheme": [null, { "option": true }],
+          "deviceScaleFactor": [null, { "option": true }],
+          "extraHTTPHeaders": [null, { "option": true }],
+          "geolocation": [null, { "option": true }],
+          "hasTouch": [null, { "option": true }],
+          "httpCredentials": [null, { "option": true }],
+          "ignoreHTTPSErrors": [null, { "option": true }],
+          "isMobile": [null, { "option": true }],
+          "javaScriptEnabled": [null, { "option": true }],
+          "locale": [null, { "option": true }],
+          "offline": [null, { "option": true }],
+          "permissions": [null, { "option": true }],
+          "proxy": [null, { "option": true }],
+          "storageState": [null, { "option": true }],
+          "timezoneId": [null, { "option": true }],
+          "userAgent": [null, { "option": true }],
+          "viewport": [null, { "option": true }],
+          "actionTimeout": [0, { "option": true }],
+          "testIdAttribute": ["data-testid", { "option": true }],
+          "navigationTimeout": [0, { "option": true }],
+          "baseURL": [null, { "option": true }],
+          "serviceWorkers": [null, { "option": true }],
+          "contextOptions": [{}, { "option": true }],
+          "_setupContextOptions": [
+            null,
+            { "auto": "all-hooks-included", "_title": "context configuration" }
+          ],
+          "_setupArtifacts": [
+            null,
+            { "auto": "all-hooks-included", "_title": "trace recording" }
+          ],
+          "_contextFactory": [null, { "scope": "test", "_title": "context" }],
+          "_contextReuseMode": "none",
+          "_reuseContext": [null, { "scope": "test", "_title": "context" }]
+        },
+        "location": {
+          "file": "/Users/agoldis/currents-playwright/node_modules/@playwright/test/lib/index.js",
+          "line": 945,
+          "column": 24
+        }
+      }
+    ]
+  },
+  "id": "8912437a35b1a0ae8c7d-85d0c8b97a289fdb54e8",
+  "_poolDigest": "cfd73f6bd5773dfaf7337e872694d256e6c6a62c",
+  "_workerHash": "chromium-cfd73f6bd5773dfaf7337e872694d256e6c6a62c-0",
+  "_projectId": "chromium",
+  "_staticAnnotations": [],
+  "clientId": "r0"
+}

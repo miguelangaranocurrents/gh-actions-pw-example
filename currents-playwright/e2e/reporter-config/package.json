@@ -1,0 +1,11 @@
+{
+  "name": "@currents/e2e-reporter-config",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "npx tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
