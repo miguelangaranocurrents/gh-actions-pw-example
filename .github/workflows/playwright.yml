@@ -16,25 +16,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Navigate to nx-example folder
-        working-directory: nx-example
-        run: echo "Entering nx-example directory"
+      - name: Install Dependencies
+        run: |
+          cd nx-example
+          npm install
 
-      - name: Install everything
-        working-directory: nx-example
-        run: npm install
-
-      - name: Run Chromium E2E
-        working-directory: nx-example
+      - name: Run Chromium E2E Tests
         env:
           CURRENTS_API_URL: https://cy-staging.currents.dev
-        run: npx nx run-many -t e2e --project=chromium
+        run: |
+          cd nx-example
+          npx nx run-many -t e2e --project=chromium
 
       - name: Wait for 60 seconds
         run: sleep 60
 
-      - name: Run Firefox E2E
-        working-directory: nx-example
+      - name: Run Firefox E2E Tests
         env:
           CURRENTS_API_URL: https://cy-staging.currents.dev
-        run: npx nx run-many -t e2e --project=firefox
+        run: |
+          cd nx-example
+          npx nx run-many -t e2e --project=firefox
