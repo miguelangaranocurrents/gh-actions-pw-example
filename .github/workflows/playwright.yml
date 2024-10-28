@@ -18,9 +18,10 @@ jobs:
 
       - name: Navigate to nx-example folder
         working-directory: nx-example
-        run: cd nx-example
+        run: echo "Entering nx-example directory"
 
       - name: Install everything
+        working-directory: nx-example
         run: npm install
 
       - name: Run Chromium E2E
