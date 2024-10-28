@@ -20,7 +20,7 @@ jobs:
         working-directory: nx-example
         run: echo "Entering nx-example directory"
 
-      - name: Run Chromium E2E Tests
+      - name: Run Chromium E2E
         working-directory: nx-example
         env:
           CURRENTS_API_URL: https://cy-staging.currents.dev
@@ -29,7 +29,7 @@ jobs:
       - name: Wait for 60 seconds
         run: sleep 60
 
-      - name: Run Firefox E2E Tests
+      - name: Run Firefox E2E
         working-directory: nx-example
         env:
           CURRENTS_API_URL: https://cy-staging.currents.dev
