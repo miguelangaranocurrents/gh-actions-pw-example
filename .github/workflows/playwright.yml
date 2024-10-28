@@ -16,6 +16,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install everything
+        run: npm install
+
       - name: Navigate to nx-example folder
         working-directory: nx-example
         run: echo "Entering nx-example directory"
