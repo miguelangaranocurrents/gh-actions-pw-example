@@ -14,15 +14,6 @@ pipeline {
             }
         }
         
-        stage('Install Playwright') {
-            steps {
-                sh '''
-                    npx playwright install
-                    npx playwright install-deps
-                '''
-            }
-        }
-        
         stage('Run Tests') {
             steps {
                 sh 'npx playwright test'
