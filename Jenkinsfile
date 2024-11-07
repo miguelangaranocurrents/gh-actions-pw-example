@@ -5,9 +5,10 @@ pipeline {
         stage('Cleanup') {
             steps {
                 deleteDir()
+                sh 'npx playwright uninstall --all'
             }
         }
-        
+
         stage('Checkout') {
             steps {
                 checkout scm
