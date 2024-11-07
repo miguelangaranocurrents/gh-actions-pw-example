@@ -8,9 +8,9 @@ pipeline {
             }
         }
 
-        stage('Clear node modules') {
+        stage('Cleanup') {
             steps {
-                sh 'rm -r node_modules'
+                deleteDir()
             }
         }
         
