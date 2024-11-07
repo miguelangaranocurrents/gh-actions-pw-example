@@ -7,6 +7,12 @@ pipeline {
                 checkout scm
             }
         }
+
+        stage('Clear node modules') {
+            steps {
+                sh 'rm -r node_modules'
+            }
+        }
         
         stage('Install Dependencies') {
             steps {
