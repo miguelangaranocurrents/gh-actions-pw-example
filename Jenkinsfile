@@ -25,9 +25,7 @@ pipeline {
         
         stage('Run Tests') {
             steps {
-                sh '''
-                    xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npx playwright test
-                '''
+                sh 'npx playwright test'
             }
         }
     }
