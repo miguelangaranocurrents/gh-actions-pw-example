@@ -52,12 +52,10 @@ pipeline {
 
 def runPlaywrightTests(shardIndex, shardTotal) {
     stage("Run Playwright Tests - Shard ${shardIndex}") {
-        steps {
-            script {
-                def command = "npx playwright test --project=${shardIndex} --total-shards=${shardTotal}"
-                echo "Running command: ${command}"
-                sh "cd basic && ${command}"
-            }
+        script {
+            def command = "npx playwright test --project=${shardIndex} --total-shards=${shardTotal}"
+            echo "Running command: ${command}"
+            sh "cd basic && ${command}"
         }
     }
 }
