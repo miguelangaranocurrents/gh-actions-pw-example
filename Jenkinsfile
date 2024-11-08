@@ -4,6 +4,7 @@ pipeline {
         CURRENTS_PROJECT_ID = 'LrO7nE'
         CURRENTS_RECORD_KEY = 'KPEvZL0LDYzcZH3U'
         CURRENTS_CI_BUILD_ID = "reporter-${JOB_NAME}-${BUILD_ID}-${BUILD_NUMBER}"
+        CURRENTS_API_KEY = 'dXGDik1SmFlDfOCyDpmhS8dNzmMrG27P0noe7qbGNvnMQQmPwWcN51dFGu1SouRP'
     }
     parameters {
         string(name: 'CI_BUILD_ID', defaultValue: '', description: 'Set this value if you want to execute only the failed tests from a specific run')
@@ -40,7 +41,16 @@ pipeline {
             }
             steps {
                 echo "Running tests with last failed: ${params.CI_BUILD_ID}"
-                runPlaywrightSharded(3, true)
+                script {
+                    def response = httpRequest(
+                        url: 'https://api.currents.dev/v1/runs/previous?projectId=${env.CURRENTS_PROJECT_ID}&ciBuildId=${params.CI_BUILD_ID}&pwLastRun=true',
+                        httpMode: 'GET',
+                        acceptType: 'APPLICATION_JSON'
+                    )
+                    echo "Status: ${response.status}"
+                    echo "Response: ${response.content}"
+                }
+                // runPlaywrightSharded(3, true)
             }
         }
 
