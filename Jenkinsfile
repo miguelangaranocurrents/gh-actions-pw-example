@@ -5,6 +5,9 @@ pipeline {
         CURRENTS_RECORD_KEY = 'KPEvZL0LDYzcZH3U' // Ensure CURRENTS_RECORD_KEY is stored in Jenkins credentials
         CURRENTS_CI_BUILD_ID = "reporter-${JOB_NAME}-${BUILD_ID}-${BUILD_NUMBER}"
     }
+    parameters {
+        string(name: 'Previous run CI Build ID', defaultValue: '', description: 'Set this value if you want to execute only the failed tests from a specific run')
+    }
     options {
         timeout(time: 60, unit: 'MINUTES')  // Set a timeout of 60 minutes
     }
