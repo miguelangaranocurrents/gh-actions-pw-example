@@ -53,7 +53,7 @@ pipeline {
 def runPlaywrightTests(shardIndex, shardTotal) {
     stage("Run Playwright Tests - Shard ${shardIndex}") {
         script {
-            def command = "npx playwright test --project=${shardIndex} --total-shards=${shardTotal}"
+            def command = "npx playwright test --shard=${shardIndex}/${shardTotal}"
             echo "Running command: ${command}"
             sh "${command}"
         }
