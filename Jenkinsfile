@@ -40,13 +40,7 @@ pipeline {
             }
             steps {
                 echo "Running tests with last failed: ${params.CI_BUILD_ID}"
-            }
-            parallel {
-                stage('Run Playwright Sharded') {
-                    steps {
-                        runPlaywrightSharded(3, true)
-                    }
-                }
+                runPlaywrightSharded(3, true)
             }
         }
 
@@ -56,13 +50,7 @@ pipeline {
             }
             steps {
                 echo "Running tests"
-            }
-            parallel {
-                stage('Run Playwright Sharded') {
-                    steps {
-                        runPlaywrightSharded(3, false)
-                    }
-                }
+                runPlaywrightSharded(3, false)
             }
         }
     }
