@@ -45,6 +45,7 @@ pipeline {
                         }
                     )
                 }
+                sh 'ls -R'
             }
         }
     }
@@ -56,6 +57,7 @@ def runPlaywrightTests(shardIndex, shardTotal) {
             def command = "npx playwright test --shard=${shardIndex}/${shardTotal} --last-failed"
             echo "Running command: ${command}"
             sh "${command}"
+            sh 'ls -R'
         }
     }
 }
