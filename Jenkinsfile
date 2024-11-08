@@ -55,7 +55,7 @@ def runPlaywrightTests(shardIndex, shardTotal) {
         script {
             def command = "npx playwright test --project=${shardIndex} --total-shards=${shardTotal}"
             echo "Running command: ${command}"
-            sh "cd basic && ${command}"
+            sh "${command}"
         }
     }
 }
