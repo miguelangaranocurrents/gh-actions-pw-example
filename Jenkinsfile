@@ -18,6 +18,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh 'npm ci || npm install' // npm ci for clean install, fallback to npm install
+                sh 'npx playwright install'
             }
         }
         
