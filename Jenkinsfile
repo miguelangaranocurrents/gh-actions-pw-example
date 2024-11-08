@@ -40,7 +40,13 @@ pipeline {
             }
             steps {
                 echo "Running tests with last failed: ${params.CI_BUILD_ID}"
-                runPlaywrightSharded(3, true)
+            }
+            parallel {
+                stage('Run Playwright Sharded') {
+                    steps {
+                        runPlaywrightSharded(3, true)
+                    }
+                }
             }
         }
 
@@ -50,44 +56,33 @@ pipeline {
             }
             steps {
                 echo "Running tests"
-                runPlaywrightSharded(3, false)
+            }
+            parallel {
+                stage('Run Playwright Sharded') {
+                    steps {
+                        runPlaywrightSharded(3, false)
+                    }
+                }
             }
         }
     }
 }
 
 def runPlaywrightSharded(shardTotal, lastFailed) {
-    stage('Run Playwright Sharded') {
-        steps {
-            script {
-                def parallelStages = [:]
-                for (int i = 1; i <= shardTotal; i++) {
-                    def shardIndex = i
-                    parallelStages["shard${shardIndex}"] = {
-                        stage('Running last failed ') {
-                            when {
-                                expression { lastFailed == true }
-                            }
-                            steps {
-                                echo "Running last failed"
-                                runPlaywrightTestsLastFailed(shardIndex, shardTotal)
-                            }
-                        }
-                        stage('Running normal ') {
-                            when {
-                                expression { lastFailed == false }
-                            }
-                            steps {
-                                echo "Running normal"
-                                runPlaywrightTests(shardIndex, shardTotal)
-                            }
-                        }
-                    }
-                }
-                parallel parallelStages
+    def parallelStages = [:]
+    for (int i = 1; i <= shardTotal; i++) {
+        def shardIndex = i
+        parallelStages["shard${shardIndex}"] = {
+            if (lastFailed) {
+                echo "Running last failed for shard ${shardIndex}"
+                runPlaywrightTestsLastFailed(shardIndex, shardTotal)
+            } else {
+                echo "Running normal for shard ${shardIndex}"
+                runPlaywrightTests(shardIndex, shardTotal)
             }
         }
     }
+    parallel parallelStages
 }
 
 def runPlaywrightTests(shardIndex, shardTotal) {
