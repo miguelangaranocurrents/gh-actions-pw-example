@@ -9,17 +9,16 @@ pipeline {
         timeout(time: 60, unit: 'MINUTES')  // Set a timeout of 60 minutes
     }
     stages {
+        stage('Cleanup') {
+            steps {
+                deleteDir()
+                sh 'npx playwright uninstall --all'
+            }
+        }
+        
         stage('Checkout') {
             steps {
                 checkout scm
-                sh 'git config --global --add safe.directory "$WORKSPACE"'
-            }
-        }
-
-        stage('Setup Node.js') {
-            steps {
-                sh 'curl -fsSL https://deb.nodesource.com/setup_20.x | bash -'
-                sh 'apt-get install -y nodejs'
             }
         }
 
