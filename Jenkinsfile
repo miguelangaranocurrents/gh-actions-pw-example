@@ -1,10 +1,10 @@
 pipeline {
-    agent {
-        docker {
-            image 'mcr.microsoft.com/playwright:latest'
-            args '-u root:root'  // run as root to install dependencies if needed
-        }
-    }
+    // agent {
+    //     docker {
+    //         image 'mcr.microsoft.com/playwright:latest'
+    //         args '-u root:root'  // run as root to install dependencies if needed
+    //     }
+    // }
     environment {
         CURRENTS_PROJECT_ID = 'LrO7nE'
         CURRENTS_RECORD_KEY = 'KPEvZL0LDYzcZH3U' // Ensure CURRENTS_RECORD_KEY is stored in Jenkins credentials
