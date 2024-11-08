@@ -15,7 +15,7 @@ test.describe(() => {
       body: screenshot,
       contentType: "image/png",
     });
-    await expect(page).toHaveTitle(/Playwright/);
+    await expect(page).toHaveTitle(/Cypress/);
   });
 
   test("get started link", async ({ page }) => {
