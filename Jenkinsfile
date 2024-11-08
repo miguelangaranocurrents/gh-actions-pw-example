@@ -45,7 +45,11 @@ pipeline {
                     def response = httpRequest(
                         url: 'https://api.currents.dev/v1/runs/previous?projectId=${env.CURRENTS_PROJECT_ID}&ciBuildId=${params.CI_BUILD_ID}&pwLastRun=true',
                         httpMode: 'GET',
-                        acceptType: 'APPLICATION_JSON'
+                        acceptType: 'APPLICATION_JSON',
+                        customHeaders: [
+                            [name: 'Authorization', value: 'Bearer ${env.CURRENTS_API_KEY}'],
+                            [name: 'Content-Type', value: 'application/json']
+                        ]
                     )
                     echo "Status: ${response.status}"
                     echo "Response: ${response.content}"
