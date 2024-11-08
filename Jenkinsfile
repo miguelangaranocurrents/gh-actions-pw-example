@@ -15,7 +15,7 @@ pipeline {
                 sh 'npx playwright uninstall --all'
             }
         }
-        
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -25,7 +25,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh 'npm ci'
-                sh 'npx playwright install chrome'
+                sh 'npx playwright install'
             }
         }
 
