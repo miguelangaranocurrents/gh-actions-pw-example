@@ -2,20 +2,22 @@ pipeline {
     agent any
     environment {
         CURRENTS_PROJECT_ID = 'LrO7nE'
-        CURRENTS_RECORD_KEY = 'KPEvZL0LDYzcZH3U' // Ensure CURRENTS_RECORD_KEY is stored in Jenkins credentials
+        CURRENTS_RECORD_KEY = 'KPEvZL0LDYzcZH3U'
         CURRENTS_CI_BUILD_ID = "reporter-${JOB_NAME}-${BUILD_ID}-${BUILD_NUMBER}"
     }
     parameters {
-        string(name: 'Previous run CI Build ID', defaultValue: '', description: 'Set this value if you want to execute only the failed tests from a specific run')
+        string(name: 'CI_BUILD_ID', defaultValue: '', description: 'Set this value if you want to execute only the failed tests from a specific run')
     }
     options {
-        timeout(time: 60, unit: 'MINUTES')  // Set a timeout of 60 minutes
+        timeout(time: 60, unit: 'MINUTES')
     }
     stages {
-        stage('Cleanup') {
+        stage('Print Parameters') {
             steps {
-                deleteDir()
-                sh 'npx playwright uninstall --all'
+                script {
+                    def ciBuildId = params.CI_BUILD_ID
+                    echo "CI Build ID: ${ciBuildId}"
+                }
             }
         }
 
@@ -32,29 +34,74 @@ pipeline {
             }
         }
 
-        stage('Run Playwright Last Failed Action') {
+        stage('Run Tests if last failed') {
+            when {
+                expression { params.CI_BUILD_ID != '' }
+            }
             steps {
-                script {
-                    def shardTotal = 3  // Total number of shards
-                    parallel (
-                        "shard1": {
-                            runPlaywrightTests(1, shardTotal)
-                        },
-                        "shard2": {
-                            runPlaywrightTests(2, shardTotal)
-                        },
-                        "shard3": {
-                            runPlaywrightTests(3, shardTotal)
+                echo "Running tests with last failed: ${params.CI_BUILD_ID}"
+                runPlaywrightSharded(3, true)
+            }
+        }
+
+        stage('Run Tests ') {
+            when {
+                expression { params.CI_BUILD_ID == '' }
+            }
+            steps {
+                echo "Running tests"
+                runPlaywrightSharded(3, false)
+            }
+        }
+    }
+}
+
+def runPlaywrightSharded(shardTotal, lastFailed) {
+    stage('Run Playwright Sharded') {
+        steps {
+            script {
+                def parallelStages = [:]
+                for (int i = 1; i <= shardTotal; i++) {
+                    def shardIndex = i
+                    parallelStages["shard${shardIndex}"] = {
+                        stage('Running last failed ') {
+                            when {
+                                expression { lastFailed == true }
+                            }
+                            steps {
+                                echo "Running last failed"
+                                runPlaywrightTestsLastFailed(shardIndex, shardTotal)
+                            }
                         }
-                    )
+                        stage('Running normal ') {
+                            when {
+                                expression { lastFailed == false }
+                            }
+                            steps {
+                                echo "Running normal"
+                                runPlaywrightTests(shardIndex, shardTotal)
+                            }
+                        }
+                    }
                 }
-                sh 'ls -R'
+                parallel parallelStages
             }
         }
     }
 }
 
 def runPlaywrightTests(shardIndex, shardTotal) {
+    stage("Run Playwright Tests - Shard ${shardIndex}") {
+        script {
+            def command = "npx playwright test --shard=${shardIndex}/${shardTotal}"
+            echo "Running command: ${command}"
+            sh "${command}"
+            sh 'ls -R'
+        }
+    }
+}
+
+def runPlaywrightTestsLastFailed(shardIndex, shardTotal) {
     stage("Run Playwright Tests - Shard ${shardIndex}") {
         script {
             def command = "npx playwright test --shard=${shardIndex}/${shardTotal} --last-failed"
