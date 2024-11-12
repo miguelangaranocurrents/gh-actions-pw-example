@@ -38,6 +38,7 @@ export default defineConfig({
     video: "on",
     screenshot: "on",
   },
+  outputDir: "test-results/",
 
   /* Configure projects for major browsers */
   projects: [
