@@ -56,14 +56,14 @@ def runTestsDecision(ciBuildId) {
                 script {
                     sh 'node scripts/apiRequest.js'
                 }
-                runPlaywrightSharded(env.TOTAL_SHARDS, true)
+                runPlaywrightSharded(env.TOTAL_SHARDS.toInteger(), true)
             }
         }
     } else {
         stage('Run Tests') {
             script {
                 echo 'Running tests'
-                runPlaywrightSharded(env.TOTAL_SHARDS, false)
+                runPlaywrightSharded(env.TOTAL_SHARDS.toInteger(), false)
             }
         }
     }
