@@ -63,6 +63,7 @@ def runPlaywrightSharded(shardTotal, lastFailed) {
     def parallelStages = [:]
     for (int i = 1; i <= shardTotal; i++) {
         def shardIndex = i
+        sh "cp scripts/.last-run.json test-results/shard-${shardIndex}/.last-run.json"
         parallelStages["shard${shardIndex}"] = {
             if (lastFailed) {
                 echo "Running last failed for shard ${shardIndex}"
@@ -90,15 +91,8 @@ def runPlaywrightTests(shardIndex, shardTotal) {
 def runPlaywrightTestsLastFailed(shardIndex, shardTotal) {
     stage("Run Playwright Tests - Shard ${shardIndex}") {
         script {
-            sh 'node scripts/apiRequest.js'
-            sh 'mkdir -p test-results'
-            sh 'cp scripts/.last-run.json test-results/.last-run.json'
-            sh 'cat test-results/.last-run.json'
-            echo 'LISTING::'
-            sh 'npx playwright test --list --last-failed'
-            def command = "npx playwright test --shard=${shardIndex}/${shardTotal} --last-failed"
+            def command = "npx playwright test --shard=${shardIndex}/${shardTotal} --last-failed --output test-results/shard-${shardIndex}"
             echo "Running command: ${command}"
-            sh 'cat test-results/.last-run.json'
             sh "${command}"
             sh 'ls -R'
         }
