@@ -71,8 +71,10 @@ def runTestsDecision(ciBuildId) {
 
 def runPlaywrightSharded(shardTotal, lastFailed) {
     def parallelStages = [:]
+    echo "SHARDTOTAL ${shardTotal} ${lastFailed}"
     for (int i = 1; i <= shardTotal; i++) {
         def shardIndex = i
+        echo "SHARDINDEX ${shardIndex}"
         parallelStages["shard${shardIndex}"] = {
             if (lastFailed) {
                 sh "mkdir -p test-results/shard-${shardIndex}"
