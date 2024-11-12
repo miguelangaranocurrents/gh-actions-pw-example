@@ -16,6 +16,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                sh "echo ${env.CI_BUILD_ID}"
                 checkout scm
             }
         }
