@@ -81,7 +81,7 @@ def runPlaywrightSharded(shardTotal, lastFailed) {
 def runPlaywrightTests(shardIndex, shardTotal) {
     stage("Run Playwright Tests - Shard ${shardIndex}") {
         script {
-            def command = "npx playwright test --shard=${shardIndex}/${shardTotal}"
+            def command = "npx pwc --shard=${shardIndex}/${shardTotal}"
             echo "Running command: ${command}"
             sh "${command}"
             sh 'ls -R'
@@ -92,7 +92,7 @@ def runPlaywrightTests(shardIndex, shardTotal) {
 def runPlaywrightTestsLastFailed(shardIndex, shardTotal) {
     stage("Run Playwright Tests - Shard ${shardIndex}") {
         script {
-            def command = "npx playwright test --shard=${shardIndex}/${shardTotal} --last-failed --output test-results/shard-${shardIndex}"
+            def command = "npx pwc --shard=${shardIndex}/${shardTotal} --last-failed --output test-results/shard-${shardIndex}"
             echo "Running command: ${command}"
             sh "${command}"
             sh 'ls -R'
