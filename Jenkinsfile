@@ -49,7 +49,7 @@ def runTestsDecision(ciBuildId) {
     def lastRunJson = readFile('scripts/.last-run.json')
     if (ciBuildId != 'none' && !lastRunJson.contains('FAILED')) {
         stage('Run Tests with last failed') {
-            steps {
+            script {
                 echo "Running tests with last failed: ${ciBuildId}"
                 script {
                     sh 'node scripts/apiRequest.js'
@@ -59,7 +59,7 @@ def runTestsDecision(ciBuildId) {
         }
     } else {
         stage('Run Tests') {
-            steps {
+            script {
                 echo 'Running tests'
                 runPlaywrightSharded(env.TOTAL_SHARDS, false)
             }
