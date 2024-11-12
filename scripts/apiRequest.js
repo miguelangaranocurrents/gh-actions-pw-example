@@ -9,7 +9,7 @@ console.log("PROJ::", projectId, ciBuildId);
 
 const options = {
   hostname: "api.currents.dev",
-  path: `/v1/runs/previous?projectId=${projectId}&ciBuildId=${ciBuildId}&pwLastRun=true`,
+  path: `/v1/runs/previous?projectId=LrO7nE&ciBuildId=reporter-Condition%20pipeline-4-4&pwLastRun=true`,
   method: "GET",
   headers: {
     Authorization: `Bearer ${process.env.CURRENTS_API_KEY}`,
