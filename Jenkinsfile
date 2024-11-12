@@ -94,6 +94,8 @@ def runPlaywrightTestsLastFailed(shardIndex, shardTotal) {
             sh 'mkdir -p test-results'
             sh 'cp scripts/.last-run.json test-results/.last-run.json'
             sh 'cat test-results/.last-run.json'
+            echo 'LISTING::'
+            sh 'npx playwright test --list --last-failed'
             def command = "npx playwright test --shard=${shardIndex}/${shardTotal} --last-failed"
             echo "Running command: ${command}"
             sh 'cat test-results/.last-run.json'
