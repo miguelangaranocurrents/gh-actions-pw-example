@@ -38,7 +38,9 @@ pipeline {
         }
 
         stage('Run Tests decision') {
-            runTestsDecision(env.CI_BUILD_ID)
+            steps {
+                runTestsDecision(env.CI_BUILD_ID)
+            }
         }
     }
 }
