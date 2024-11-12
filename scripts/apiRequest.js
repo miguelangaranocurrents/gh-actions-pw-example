@@ -27,7 +27,7 @@ const req = https.request(options, res => {
 
     res.on('end', () => {
         fs.writeFileSync('.last-run.json', data);
-        console.log('Response saved to .last-run.json');
+        console.log('Response saved to .last-run.json', data);
     });
 });
 
