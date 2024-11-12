@@ -29,7 +29,7 @@ const req = https.request(options, (res) => {
 
   res.on("end", () => {
     try {
-      fs.writeFileSync("scripts/.last-run.json", JSON.parse(data).pwLastRun);
+      fs.writeFileSync("scripts/.last-run.json", JSON.stringify(JSON.parse(data).pwLastRun));
       console.log("Response saved to .last-run.json", JSON.parse(data).pwLastRun);
     } catch (e) {
       console.log("ERR::", e);
