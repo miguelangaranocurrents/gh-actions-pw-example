@@ -63,8 +63,8 @@ def runPlaywrightSharded(shardTotal, lastFailed) {
     def parallelStages = [:]
     for (int i = 1; i <= shardTotal; i++) {
         def shardIndex = i
-        sh "cp scripts/.last-run.json test-results/shard-${shardIndex}/.last-run.json"
         sh "mkdir -p test-results/shard-${shardIndex}"
+        sh "cp scripts/.last-run.json test-results/shard-${shardIndex}/.last-run.json"
         parallelStages["shard${shardIndex}"] = {
             if (lastFailed) {
                 echo "Running last failed for shard ${shardIndex}"
