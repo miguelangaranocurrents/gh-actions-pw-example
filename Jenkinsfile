@@ -122,8 +122,8 @@ def runPlaywrightOrchestration(parallelTotal, lastFailed) {
         def parallelIndex = i
         parallelStages["parallel${parallelIndex}"] = {
             if (lastFailed) {
-                sh "mkdir -p test-results/parallel-${shardIndex}"
-                sh "cp scripts/.last-run.json test-results/parallel-${shardIndex}/.last-run.json"
+                sh "mkdir -p test-results/parallel-${parallelIndex}"
+                sh "cp scripts/.last-run.json test-results/parallel-${parallelIndex}/.last-run.json"
                 runPlaywrightTestsLastFailedOrchestration(parallelIndex)
             } else {
                 runPlaywrightTestsOrchestration(parallelIndex)
