@@ -47,7 +47,7 @@ pipeline {
                     sh 'cp scripts/.last-run.json test-results/.last-run.json'
                     sh 'cat test-results/.last-run.json'
                 }
-            // runPlaywrightSharded(3, true)
+                runPlaywrightSharded(3, true)
             }
         }
 
