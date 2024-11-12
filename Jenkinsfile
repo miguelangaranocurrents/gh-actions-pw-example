@@ -4,6 +4,7 @@ pipeline {
         CURRENTS_PROJECT_ID = 'LrO7nE'
         CURRENTS_RECORD_KEY = 'KPEvZL0LDYzcZH3U'
         CURRENTS_CI_BUILD_ID = "reporter-${JOB_NAME}-${BUILD_ID}-${BUILD_NUMBER}"
+        CI_BUILD_ID = "reporter-${JOB_NAME}-${BUILD_ID}-${BUILD_NUMBER}"
         CURRENTS_API_KEY = 'dXGDik1SmFlDfOCyDpmhS8dNzmMrG27P0noe7qbGNvnMQQmPwWcN51dFGu1SouRP'
     }
     parameters {
@@ -42,17 +43,8 @@ pipeline {
             steps {
                 echo "Running tests with last failed: ${params.CI_BUILD_ID}"
                 script {
-                    def response = httpRequest(
-                        url: 'https://api.currents.dev/v1/runs/previous?projectId=${env.CURRENTS_PROJECT_ID}&ciBuildId=${params.CI_BUILD_ID}&pwLastRun=true',
-                        httpMode: 'GET',
-                        acceptType: 'APPLICATION_JSON',
-                        customHeaders: [
-                            [name: 'Authorization', value: 'Bearer ${env.CURRENTS_API_KEY}'],
-                            [name: 'Content-Type', value: 'application/json']
-                        ]
-                    )
-                    echo "Status: ${response.status}"
-                    echo "Response: ${response.content}"
+                    sh 'node apiRequest.js'
+                    sh 'cat .last-run.json'
                 }
                 // runPlaywrightSharded(3, true)
             }
