@@ -14,15 +14,6 @@ pipeline {
         timeout(time: 60, unit: 'MINUTES')
     }
     stages {
-        stage('Print Parameters') {
-            steps {
-                script {
-                    def ciBuildId = params.CI_BUILD_ID
-                    echo "CI Build ID: ${ciBuildId}"
-                }
-            }
-        }
-
         stage('Checkout') {
             steps {
                 checkout scm
