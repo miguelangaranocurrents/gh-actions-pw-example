@@ -3,7 +3,7 @@ const https = require("https");
 
 // Encode the projectId and ciBuildId to ensure any special characters are URL-safe
 const projectId = encodeURIComponent(process.env.CURRENTS_PROJECT_ID);
-const ciBuildId = process.env.CI_BUILD_ID.replace(/ /g, "+");
+const ciBuildId = process.env.CI_BUILD_ID;
 
 console.log("PROJ::", projectId, ciBuildId);
 
@@ -17,6 +17,8 @@ const options = {
     Accept: "application/json",
   },
 };
+
+console.log("OPTS::", options);
 
 const req = https.request(options, (res) => {
   let data = "";
