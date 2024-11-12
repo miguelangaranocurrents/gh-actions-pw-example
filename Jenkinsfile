@@ -1,14 +1,14 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'CI_BUILD_ID', defaultValue: '', description: 'Set this value if you want to execute only the failed tests from a specific run')
+    }
     environment {
         CURRENTS_PROJECT_ID = 'LrO7nE'
         CURRENTS_RECORD_KEY = 'KPEvZL0LDYzcZH3U'
         CURRENTS_CI_BUILD_ID = "reporter-${JOB_NAME}-${BUILD_ID}-${BUILD_NUMBER}"
-        CI_BUILD_ID = "reporter-${JOB_NAME}-${BUILD_ID}-${BUILD_NUMBER}"
+        CI_BUILD_ID = params.CI_BUILD_ID
         CURRENTS_API_KEY = 'dXGDik1SmFlDfOCyDpmhS8dNzmMrG27P0noe7qbGNvnMQQmPwWcN51dFGu1SouRP'
-    }
-    parameters {
-        string(name: 'CI_BUILD_ID', defaultValue: '', description: 'Set this value if you want to execute only the failed tests from a specific run')
     }
     options {
         timeout(time: 60, unit: 'MINUTES')
