@@ -90,6 +90,7 @@ def runPlaywrightTestsLastFailed(shardIndex, shardTotal) {
         script {
             def command = "npx playwright test --shard=${shardIndex}/${shardTotal} --last-failed"
             echo "Running command: ${command}"
+            cat "test-results/.last-run.json"
             sh "${command}"
             sh 'ls -R'
         }
