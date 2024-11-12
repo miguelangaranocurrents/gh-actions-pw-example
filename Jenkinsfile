@@ -39,6 +39,7 @@ pipeline {
                     sh 'mkdir -p test-results'
                     sh 'cp scripts/.last-run.json test-results/.last-run.json'
                     sh 'chmod 444 test-results/.last-run.json'
+                    sh 'sudo chattr +i test-results/.last-run.json'
                     sh 'cat test-results/.last-run.json'
                 }
                 runPlaywrightSharded(3, true)
