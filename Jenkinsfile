@@ -38,10 +38,6 @@ pipeline {
                     sh 'node scripts/apiRequest.js'
                     sh 'mkdir -p test-results'
                     sh 'cp scripts/.last-run.json test-results/.last-run.json'
-                    sh 'chmod 777 test-results/'
-                    sh 'chattr -i test-results/'
-                    sh 'chmod 777 test-results/.last-run.json'
-                    sh 'chattr -i test-results/.last-run.json'
                     sh 'cat test-results/.last-run.json'
                 }
                 runPlaywrightSharded(3, true)
