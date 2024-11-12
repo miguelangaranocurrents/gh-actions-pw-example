@@ -35,6 +35,7 @@ pipeline {
                 echo "Running tests with last failed: ${params.CI_BUILD_ID}"
                 script {
                     sh 'node scripts/apiRequest.js'
+                    sh 'mkdir -p test-results'
                     sh 'cp scripts/.last-run.json test-results/.last-run.json'
                     sh 'cat test-results/.last-run.json'
                 }
