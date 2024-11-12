@@ -2,6 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name: 'CI_BUILD_ID', defaultValue: 'none', description: 'Set this value if you want to execute only the failed tests from a specific run')
+        string(name: 'IS_ORCHESTRATION', defaultValue: false, description: 'Set this value if you want to execute an orchestrated run')
     }
     environment {
         CURRENTS_PROJECT_ID = 'LrO7nE'
@@ -9,6 +10,7 @@ pipeline {
         CURRENTS_CI_BUILD_ID = "reporter-${JOB_NAME}-${BUILD_ID}-${BUILD_NUMBER}"
         CURRENTS_API_KEY = 'dXGDik1SmFlDfOCyDpmhS8dNzmMrG27P0noe7qbGNvnMQQmPwWcN51dFGu1SouRP'
         TOTAL_SHARDS = 3
+        PARALLEL_JOBS = 4
     }
     options {
         timeout(time: 60, unit: 'MINUTES')
@@ -41,13 +43,13 @@ pipeline {
 
         stage('Run Tests decision') {
             steps {
-                runTestsDecision(env.CI_BUILD_ID)
+                runTestsDecision(env.CI_BUILD_ID, params.IS_ORCHESTRATION)
             }
         }
     }
 }
 
-def runTestsDecision(ciBuildId) {
+def runTestsDecision(ciBuildId, isOrchestration) {
     if (ciBuildId && ciBuildId != 'none') {
         stage('Run Tests with last failed') {
             script {
@@ -56,14 +58,22 @@ def runTestsDecision(ciBuildId) {
                     sh 'node scripts/apiRequest.js'
                     sh 'cat scripts/.last-run.json'
                 }
-                runPlaywrightSharded(env.TOTAL_SHARDS.toInteger(), true)
+                if (isOrchestration && isOrchestration == 'true') {
+                    runPlaywrightOrchestrated(env.PARALLEL_JOBS.toInteger(), true)
+                } else {
+                    runPlaywrightSharded(env.TOTAL_SHARDS.toInteger(), true)
+                }
             }
         }
     } else {
         stage('Run Tests') {
             script {
                 echo 'Running tests'
-                runPlaywrightSharded(env.TOTAL_SHARDS.toInteger(), false)
+                if (isOrchestration && isOrchestration == 'true') {
+                    runPlaywrightOrchestrated(env.PARALLEL_JOBS.toInteger(), false)
+                } else {
+                    runPlaywrightSharded(env.TOTAL_SHARDS.toInteger(), false)
+                }
             }
         }
     }
@@ -100,6 +110,43 @@ def runPlaywrightTestsLastFailed(shardIndex, shardTotal) {
     stage("Run Playwright Tests - Shard ${shardIndex}") {
         script {
             def command = "npx pwc --shard=${shardIndex}/${shardTotal} --last-failed --output test-results/shard-${shardIndex}"
+            echo "Running command: ${command}"
+            sh "${command}"
+        }
+    }
+}
+
+def runPlaywrightOrchestration(parallelTotal, lastFailed) {
+    def parallelStages = [:]
+    for (int i = 1; i <= parallelTotal; i++) {
+        def parallelIndex = i
+        parallelStages["parallel${parallelIndex}"] = {
+            if (lastFailed) {
+                sh "mkdir -p test-results/parallel-${shardIndex}"
+                sh "cp scripts/.last-run.json test-results/parallel-${shardIndex}/.last-run.json"
+                runPlaywrightTestsLastFailedOrchestration(parallelIndex, parallelTotal)
+            } else {
+                runPlaywrightTestsOrchestration(parallelIndex, parallelTotal)
+            }
+        }
+    }
+    parallel parallelStages
+}
+
+def runPlaywrightTestsOrchestration(parallelIndex) {
+    stage("Run Playwright Tests - Orchestration ${parallelIndex}") {
+        script {
+            def command = "npx pwc-p"
+            echo "Running command: ${command}"
+            sh "${command}"
+        }
+    }
+}
+
+def runPlaywrightTestsLastFailedOrchestration(parallelIndex) {
+    stage("Run Playwright Tests - Orchestration ${parallelIndex}") {
+        script {
+            def command = "npx pwc-p --last-failed --output test-results/parallel-${shardIndex}"
             echo "Running command: ${command}"
             sh "${command}"
         }
