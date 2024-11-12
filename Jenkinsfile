@@ -8,6 +8,7 @@ pipeline {
         CURRENTS_RECORD_KEY = 'KPEvZL0LDYzcZH3U'
         CURRENTS_CI_BUILD_ID = "reporter-${JOB_NAME}-${BUILD_ID}-${BUILD_NUMBER}"
         CURRENTS_API_KEY = 'dXGDik1SmFlDfOCyDpmhS8dNzmMrG27P0noe7qbGNvnMQQmPwWcN51dFGu1SouRP'
+        TOTAL_SHARDS = 3
     }
     options {
         timeout(time: 60, unit: 'MINUTES')
@@ -15,11 +16,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    env.CI_BUILD_ID = "${params.CI_BUILD_ID}"
-                    echo "CI_BUILD_ID is set to: ${params.CI_BUILD_ID}"
-                }
-                sh "echo ${env.CI_BUILD_ID}"
                 checkout scm
             }
         }
@@ -31,29 +27,39 @@ pipeline {
             }
         }
 
-        stage('Run Tests if last failed') {
-            when {
-                expression { env.CI_BUILD_ID != 'none' }
-            }
+        stage('Set params CI Build ID') {
             steps {
-                echo "Running tests with last failed: ${env.CI_BUILD_ID}"
                 script {
-                    sh 'node scripts/apiRequest.js'
-                    sh 'mkdir -p test-results'
-                    sh 'cp scripts/.last-run.json test-results/.last-run.json'
-                    sh 'cat test-results/.last-run.json'
+                    env.CI_BUILD_ID = "${params.CI_BUILD_ID} ?: 'none'"
+                    echo "CI_BUILD_ID is set to: ${params.CI_BUILD_ID}"
                 }
-                runPlaywrightSharded(3, true)
+                echo "Verify value: ${env.CI_BUILD_ID}"
             }
         }
 
-        stage('Run Tests ') {
-            when {
-                expression { env.CI_BUILD_ID == 'none' }
+        stage('Run Tests decision') {
+            runTestsDecision(env.CI_BUILD_ID)
+        }
+    }
+}
+
+def runTestsDecision(ciBuildId) {
+    def lastRunJson = readFile('scripts/.last-run.json')
+    if (ciBuildId != 'none' && !lastRunJson.contains('FAILED')) {
+        stage('Run Tests with last failed') {
+            steps {
+                echo "Running tests with last failed: ${ciBuildId}"
+                script {
+                    sh 'node scripts/apiRequest.js'
+                }
+                runPlaywrightSharded(env.TOTAL_SHARDS, true)
             }
+        }
+    } else {
+        stage('Run Tests') {
             steps {
                 echo 'Running tests'
-                runPlaywrightSharded(3, false)
+                runPlaywrightSharded(env.TOTAL_SHARDS, false)
             }
         }
     }
@@ -63,14 +69,12 @@ def runPlaywrightSharded(shardTotal, lastFailed) {
     def parallelStages = [:]
     for (int i = 1; i <= shardTotal; i++) {
         def shardIndex = i
-        sh "mkdir -p test-results/shard-${shardIndex}"
-        sh "cp scripts/.last-run.json test-results/shard-${shardIndex}/.last-run.json"
         parallelStages["shard${shardIndex}"] = {
             if (lastFailed) {
-                echo "Running last failed for shard ${shardIndex}"
+                sh "mkdir -p test-results/shard-${shardIndex}"
+                sh "cp scripts/.last-run.json test-results/shard-${shardIndex}/.last-run.json"
                 runPlaywrightTestsLastFailed(shardIndex, shardTotal)
             } else {
-                echo "Running normal for shard ${shardIndex}"
                 runPlaywrightTests(shardIndex, shardTotal)
             }
         }
@@ -84,7 +88,6 @@ def runPlaywrightTests(shardIndex, shardTotal) {
             def command = "npx pwc --shard=${shardIndex}/${shardTotal}"
             echo "Running command: ${command}"
             sh "${command}"
-            sh 'ls -R'
         }
     }
 }
@@ -95,7 +98,6 @@ def runPlaywrightTestsLastFailed(shardIndex, shardTotal) {
             def command = "npx pwc --shard=${shardIndex}/${shardTotal} --last-failed --output test-results/shard-${shardIndex}"
             echo "Running command: ${command}"
             sh "${command}"
-            sh 'ls -R'
         }
     }
 }
