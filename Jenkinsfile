@@ -48,7 +48,7 @@ pipeline {
 }
 
 def runTestsDecision(ciBuildId) {
-    if (ciBuildId != 'none') {
+    if (ciBuildId && ciBuildId != 'none') {
         stage('Run Tests with last failed') {
             script {
                 echo "Running tests with last failed: ${ciBuildId} ${env.TOTAL_SHARDS}"
