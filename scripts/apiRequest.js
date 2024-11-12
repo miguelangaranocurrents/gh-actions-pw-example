@@ -2,8 +2,8 @@ const fs = require("fs");
 const https = require("https");
 
 // Encode the projectId and ciBuildId to ensure any special characters are URL-safe
-const projectId = encodeURIComponent('LrO7nE');
-const ciBuildId = encodeURIComponent('reporter-test pipeline-4-4');
+const projectId = encodeURIComponent(process.env.CURRENTS_PROJECT_ID);
+const ciBuildId = encodeURIComponent(process.env.CI_BUILD_ID);
 
 console.log("PROJ::", projectId, ciBuildId);
 
