@@ -7,7 +7,6 @@ pipeline {
         CURRENTS_PROJECT_ID = 'LrO7nE'
         CURRENTS_RECORD_KEY = 'KPEvZL0LDYzcZH3U'
         CURRENTS_CI_BUILD_ID = "reporter-${JOB_NAME}-${BUILD_ID}-${BUILD_NUMBER}"
-        CI_BUILD_ID = "${params.CI_BUILD_ID}"
         CURRENTS_API_KEY = 'dXGDik1SmFlDfOCyDpmhS8dNzmMrG27P0noe7qbGNvnMQQmPwWcN51dFGu1SouRP'
     }
     options {
@@ -16,6 +15,10 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                script {
+                    env.CI_BUILD_ID = "${params.CI_BUILD_ID}"
+                    echo "CI_BUILD_ID is set to: ${params.CI_BUILD_ID}"
+                }
                 sh "echo ${env.CI_BUILD_ID}"
                 checkout scm
             }
