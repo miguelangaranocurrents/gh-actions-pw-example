@@ -32,7 +32,7 @@ pipeline {
         stage('Set params CI Build ID') {
             steps {
                 script {
-                    env.CI_BUILD_ID = "${params.CI_BUILD_ID} ?: 'none'"
+                    env.CI_BUILD_ID = "${params.CI_BUILD_ID}"
                     echo "CI_BUILD_ID is set to: ${params.CI_BUILD_ID}"
                 }
                 echo "Verify value: ${env.CI_BUILD_ID}"
