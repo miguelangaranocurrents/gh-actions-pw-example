@@ -48,8 +48,7 @@ pipeline {
 }
 
 def runTestsDecision(ciBuildId) {
-    def lastRunJson = readFile('scripts/.last-run.json')
-    if (ciBuildId != 'none' && !lastRunJson.contains('FAILED')) {
+    if (ciBuildId != 'none') {
         stage('Run Tests with last failed') {
             script {
                 echo "${lastRunJson}"
