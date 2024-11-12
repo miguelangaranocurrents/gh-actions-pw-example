@@ -37,7 +37,7 @@ pipeline {
                     env.CI_BUILD_ID = "${params.CI_BUILD_ID}"
                     echo "CI_BUILD_ID is set to: ${params.CI_BUILD_ID}"
                 }
-                echo "Verify value: ${env.CI_BUILD_ID}"
+                echo "Verify values: ${env.CI_BUILD_ID} ${params.IS_ORCHESTRATION}"
             }
         }
 
