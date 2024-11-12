@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name: 'CI_BUILD_ID', defaultValue: 'none', description: 'Set this value if you want to execute only the failed tests from a specific run')
-        string(name: 'IS_ORCHESTRATION', defaultValue: false, description: 'Set this value if you want to execute an orchestrated run')
+        booleanParam(name: 'IS_ORCHESTRATION', defaultValue: false, description: 'Set this value if you want to execute an orchestrated run')
     }
     environment {
         CURRENTS_PROJECT_ID = 'LrO7nE'
