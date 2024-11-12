@@ -38,8 +38,6 @@ pipeline {
                     sh 'node scripts/apiRequest.js'
                     sh 'mkdir -p test-results'
                     sh 'cp scripts/.last-run.json test-results/.last-run.json'
-                    sh 'chmod 444 test-results/.last-run.json'
-                    sh 'chattr +i test-results/.last-run.json'
                     sh 'cat test-results/.last-run.json'
                 }
                 runPlaywrightSharded(3, true)
@@ -89,9 +87,13 @@ def runPlaywrightTests(shardIndex, shardTotal) {
 def runPlaywrightTestsLastFailed(shardIndex, shardTotal) {
     stage("Run Playwright Tests - Shard ${shardIndex}") {
         script {
+            sh 'node scripts/apiRequest.js'
+            sh 'mkdir -p test-results'
+            sh 'cp scripts/.last-run.json test-results/.last-run.json'
+            sh 'cat test-results/.last-run.json'
             def command = "npx playwright test --shard=${shardIndex}/${shardTotal} --last-failed"
             echo "Running command: ${command}"
-            sh "cat test-results/.last-run.json"
+            sh 'cat test-results/.last-run.json'
             sh "${command}"
             sh 'ls -R'
         }
