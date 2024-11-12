@@ -43,8 +43,8 @@ pipeline {
             steps {
                 echo "Running tests with last failed: ${params.CI_BUILD_ID}"
                 script {
-                    sh 'node apiRequest.js'
-                    sh 'cat .last-run.json'
+                    sh 'node scripts/apiRequest.js'
+                    sh 'cat scripts/.last-run.json'
                 }
                 // runPlaywrightSharded(3, true)
             }
