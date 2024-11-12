@@ -24,8 +24,8 @@ pipeline {
             steps {
                 sh 'npm ci'
                 sh 'npx playwright install'
-                sh 'rm -r test-results'
-                sh 'rm -r scripts/.last-run.json'
+                sh 'rm -rf test-results'
+                sh 'rm -rf scripts/.last-run.json'
             }
         }
 
