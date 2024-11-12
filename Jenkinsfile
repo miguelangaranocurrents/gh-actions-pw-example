@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'CI_BUILD_ID', defaultValue: '', description: 'Set this value if you want to execute only the failed tests from a specific run')
+        string(name: 'CI_BUILD_ID', defaultValue: 'none', description: 'Set this value if you want to execute only the failed tests from a specific run')
     }
     environment {
         CURRENTS_PROJECT_ID = 'LrO7nE'
@@ -30,7 +30,7 @@ pipeline {
 
         stage('Run Tests if last failed') {
             when {
-                expression { env.CI_BUILD_ID != '' }
+                expression { env.CI_BUILD_ID != 'none' }
             }
             steps {
                 echo "Running tests with last failed: ${env.CI_BUILD_ID}"
@@ -46,7 +46,7 @@ pipeline {
 
         stage('Run Tests ') {
             when {
-                expression { env.CI_BUILD_ID == '' }
+                expression { env.CI_BUILD_ID == 'none' }
             }
             steps {
                 echo 'Running tests'
