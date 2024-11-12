@@ -54,6 +54,7 @@ def runTestsDecision(ciBuildId) {
                 echo "Running tests with last failed: ${ciBuildId} ${env.TOTAL_SHARDS}"
                 script {
                     sh 'node scripts/apiRequest.js'
+                    sh 'cat scripts/.last-run.json'
                 }
                 runPlaywrightSharded(env.TOTAL_SHARDS.toInteger(), true)
             }
@@ -70,10 +71,8 @@ def runTestsDecision(ciBuildId) {
 
 def runPlaywrightSharded(shardTotal, lastFailed) {
     def parallelStages = [:]
-    echo "SHARDTOTAL ${shardTotal} ${lastFailed}"
     for (int i = 1; i <= shardTotal; i++) {
         def shardIndex = i
-        echo "SHARDINDEX ${shardIndex}"
         parallelStages["shard${shardIndex}"] = {
             if (lastFailed) {
                 sh "mkdir -p test-results/shard-${shardIndex}"
