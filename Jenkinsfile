@@ -58,7 +58,7 @@ def runTestsDecision(ciBuildId, isOrchestration) {
                     sh 'node scripts/apiRequest.js'
                     sh 'cat scripts/.last-run.json'
                 }
-                if (isOrchestration && isOrchestration == 'true') {
+                if (isOrchestration && isOrchestration == true) {
                     runPlaywrightOrchestrated(env.PARALLEL_JOBS.toInteger(), true)
                 } else {
                     runPlaywrightSharded(env.TOTAL_SHARDS.toInteger(), true)
@@ -69,7 +69,7 @@ def runTestsDecision(ciBuildId, isOrchestration) {
         stage('Run Tests') {
             script {
                 echo 'Running tests'
-                if (isOrchestration && isOrchestration == 'true') {
+                if (isOrchestration && isOrchestration == true) {
                     runPlaywrightOrchestrated(env.PARALLEL_JOBS.toInteger(), false)
                 } else {
                     runPlaywrightSharded(env.TOTAL_SHARDS.toInteger(), false)
