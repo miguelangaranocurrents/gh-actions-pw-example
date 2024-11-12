@@ -124,9 +124,9 @@ def runPlaywrightOrchestration(parallelTotal, lastFailed) {
             if (lastFailed) {
                 sh "mkdir -p test-results/parallel-${shardIndex}"
                 sh "cp scripts/.last-run.json test-results/parallel-${shardIndex}/.last-run.json"
-                runPlaywrightTestsLastFailedOrchestration(parallelIndex, parallelTotal)
+                runPlaywrightTestsLastFailedOrchestration(parallelIndex)
             } else {
-                runPlaywrightTestsOrchestration(parallelIndex, parallelTotal)
+                runPlaywrightTestsOrchestration(parallelIndex)
             }
         }
     }
@@ -146,7 +146,7 @@ def runPlaywrightTestsOrchestration(parallelIndex) {
 def runPlaywrightTestsLastFailedOrchestration(parallelIndex) {
     stage("Run Playwright Tests - Orchestration ${parallelIndex}") {
         script {
-            def command = "npx pwc-p --last-failed --output test-results/parallel-${shardIndex}"
+            def command = "npx pwc-p --last-failed --output test-results/parallel-${parallelIndex}"
             echo "Running command: ${command}"
             sh "${command}"
         }
