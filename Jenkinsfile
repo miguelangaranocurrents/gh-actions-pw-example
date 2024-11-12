@@ -51,7 +51,6 @@ def runTestsDecision(ciBuildId) {
     if (ciBuildId != 'none') {
         stage('Run Tests with last failed') {
             script {
-                echo "${lastRunJson}"
                 echo "Running tests with last failed: ${ciBuildId} ${env.TOTAL_SHARDS}"
                 script {
                     sh 'node scripts/apiRequest.js'
