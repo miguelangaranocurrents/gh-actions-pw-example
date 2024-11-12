@@ -7,7 +7,7 @@ pipeline {
         CURRENTS_PROJECT_ID = 'LrO7nE'
         CURRENTS_RECORD_KEY = 'KPEvZL0LDYzcZH3U'
         CURRENTS_CI_BUILD_ID = "reporter-${JOB_NAME}-${BUILD_ID}-${BUILD_NUMBER}"
-        CI_BUILD_ID = '${params.CI_BUILD_ID}'
+        CI_BUILD_ID = "${params.CI_BUILD_ID}"
         CURRENTS_API_KEY = 'dXGDik1SmFlDfOCyDpmhS8dNzmMrG27P0noe7qbGNvnMQQmPwWcN51dFGu1SouRP'
     }
     options {
@@ -48,7 +48,7 @@ pipeline {
                     sh 'ls scripts'
                     sh 'cat scripts/.last-run.json'
                 }
-                // runPlaywrightSharded(3, true)
+            // runPlaywrightSharded(3, true)
             }
         }
 
@@ -57,7 +57,7 @@ pipeline {
                 expression { params.CI_BUILD_ID == '' }
             }
             steps {
-                echo "Running tests"
+                echo 'Running tests'
                 runPlaywrightSharded(3, false)
             }
         }
