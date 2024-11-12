@@ -29,10 +29,10 @@ pipeline {
 
         stage('Run Tests if last failed') {
             when {
-                expression { params.CI_BUILD_ID != '' }
+                expression { env.CI_BUILD_ID != '' }
             }
             steps {
-                echo "Running tests with last failed: ${params.CI_BUILD_ID}"
+                echo "Running tests with last failed: ${env.CI_BUILD_ID}"
                 script {
                     sh 'node scripts/apiRequest.js'
                     sh 'mkdir -p test-results'
@@ -46,7 +46,7 @@ pipeline {
 
         stage('Run Tests ') {
             when {
-                expression { params.CI_BUILD_ID == '' }
+                expression { env.CI_BUILD_ID == '' }
             }
             steps {
                 echo 'Running tests'
