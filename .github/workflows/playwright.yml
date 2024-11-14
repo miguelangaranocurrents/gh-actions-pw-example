@@ -22,19 +22,6 @@ jobs:
         with:
           node-version: 18
 
-      - name: Set runner name based on shard
-        run: |
-          echo "RUNNER_NAME=${{ matrix.runner_name }}" >> $GITHUB_ENV
-          echo "SHARD=${{ matrix.shard }}" >> $GITHUB_ENV
-          echo "CURRENTS_MACHINE_ID=${{ matrix.runner_name }}" >> $GITHUB_ENV
-
-      - name: Log runner name
-        run: |
-          echo "This job is running on $RUNNER_NAME"
-        env:
-          RUNNER_NAME: ${{ matrix.runner_name }}
-          CURRENTS_MACHINE_ID: ${{ matrix.runner_name }}
-
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
@@ -43,9 +30,8 @@ jobs:
 
       - name: Run Playwright tests
         env:
-          RUNNER_NAME: $RUNNER_NAME
-          CURRENTS_MACHINE_ID: $RUNNER_NAME
-        run: npx pwc --key KPEvZL0LDYzcZH3U --project-id WeZwSj --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard $SHARD
+          CURRENTS_MACHINE_ID: ${{ matrix.runner_name }}
+        run: npx pwc --key KPEvZL0LDYzcZH3U --project-id WeZwSj --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard ${{ matrix.shard }}
 
     # - name: Run commit info
     #   run: yarn ts-node ./src/commit-info-test.ts
