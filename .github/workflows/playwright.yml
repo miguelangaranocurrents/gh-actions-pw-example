@@ -48,9 +48,6 @@ jobs:
           echo "SHARD=${{ matrix.shard }}" >> $GITHUB_ENV
           echo "CURRENTS_MACHINE_ID=${{ matrix.runner_name }}" >> $GITHUB_ENV
 
-      - name: Set runner name based on shard for pwc
-        run: 
-
       - name: Log runner name
         run: |
           echo "This job is running on $RUNNER_NAME"
