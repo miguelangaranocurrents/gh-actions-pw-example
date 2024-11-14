@@ -18,6 +18,12 @@ jobs:
       with:
         node-version: 18
 
+    - name: Set runner name based on shard
+      run: echo "RUNNER_NAME=Runner-${{ matrix.shard }}" >> $GITHUB_ENV
+
+    - name: Set runner name based on shard for pwc
+      run: echo "CURRENTS_MACHINE_ID=Runner-${{ matrix.shard }}" >> $GITHUB_ENV
+
     - name: Install Playwright browsers
       run: npx playwright install --with-deps
 
