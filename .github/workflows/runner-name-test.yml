@@ -1,0 +1,25 @@
+name: Log Runner Name
+
+on: 
+  workflow_dispatch:  # Allows the workflow to be run manually
+
+jobs:
+  log-runner-name:
+    strategy:
+      matrix:
+        runner_name: [ "Runner 1", "Runner 2", "Runner 3" ]  # Define runner names here
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set runner name
+        run: echo "RUNNER_NAME=${{ matrix.runner_name }}" >> $GITHUB_ENV
+
+      - name: Log runner name
+        run: |
+          echo "This job is running on $RUNNER_NAME"
+        env:
+          RUNNER_NAME: ${{ matrix.runner_name }}
