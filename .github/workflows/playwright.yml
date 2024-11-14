@@ -1,9 +1,9 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 jobs:
   playwright-tests:
     timeout-minutes: 60
@@ -12,27 +12,42 @@ jobs:
       fail-fast: false
       matrix:
         shard: [1/6, 2/6, 3/6, 4/6, 5/6, 6/6]
+        runner_name:
+          [
+            "Runner 1",
+            "Runner 2",
+            "Runner 3",
+            "Runner 4",
+            "Runner 5",
+            "Runner 6",
+          ]
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Set runner name based on shard
-      run: echo "RUNNER_NAME=Runner-${{ matrix.shard }}" >> $GITHUB_ENV
+      - name: Set runner name based on shard
+        run: echo "RUNNER_NAME=${{ matrix.runner_name }}" >> $GITHUB_ENV
 
-    - name: Set runner name based on shard for pwc
-      run: echo "CURRENTS_MACHINE_ID=Runner-${{ matrix.shard }}" >> $GITHUB_ENV
+      - name: Set runner name based on shard for pwc
+        run: echo "CURRENTS_MACHINE_ID=${{ matrix.runner_name }}" >> $GITHUB_ENV
 
-    - name: Install Playwright browsers
-      run: npx playwright install --with-deps
+      - name: Log runner name
+        run: |
+          echo "This job is running on $RUNNER_NAME"
+        env:
+          RUNNER_NAME: ${{ matrix.runner_name }}
+          CURRENTS_MACHINE_ID: ${{ matrix.runner_name }}
 
-    - name: Install dependencies
-      run: npm install
-    
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
-    - name: Run Playwright tests
-      run: npx pwc --key KPEvZL0LDYzcZH3U --project-id WeZwSj --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard ${{ matrix.shard }}
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Playwright tests
+        run: npx pwc --key KPEvZL0LDYzcZH3U --project-id WeZwSj --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard ${{ matrix.shard }}
 
     # - name: Run commit info
     #   run: yarn ts-node ./src/commit-info-test.ts
