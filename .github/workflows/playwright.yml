@@ -11,71 +11,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner_name: [ "Runner 1", "Runner 2", "Runner 3", "Runner 4", "Runner 5", "Runner 6" ]
-        shard: [1/6, 2/6, 3/6, 4/6, 5/6, 6/6]
-
-      # Limit combinations to ensure each runner_name gets only one corresponding shard
-        exclude:
-          - runner_name: "Runner 1"  # Exclude all combinations except (Runner 1, 1/6), (Runner 2, 2/6), etc.
-            shard: 2/6
+        runner_name: [ "Runner 1", "Runner 2" ]
+        shard: [1/2, 2/2]
+        include:
           - runner_name: "Runner 1"
-            shard: 3/6
-          - runner_name: "Runner 1"
-            shard: 4/6
-          - runner_name: "Runner 1"
-            shard: 5/6
-          - runner_name: "Runner 1"
-            shard: 6/6
+            shard: 1/2
           - runner_name: "Runner 2"
-            shard: 1/6
-          - runner_name: "Runner 2"
-            shard: 3/6
-          - runner_name: "Runner 2"
-            shard: 4/6
-          - runner_name: "Runner 2"
-            shard: 5/6
-          - runner_name: "Runner 2"
-            shard: 6/6
-          - runner_name: "Runner 3"
-            shard: 1/6
-          - runner_name: "Runner 3"
-            shard: 2/6
-          - runner_name: "Runner 3"
-            shard: 4/6
-          - runner_name: "Runner 3"
-            shard: 5/6
-          - runner_name: "Runner 3"
-            shard: 6/6
-          - runner_name: "Runner 4"
-            shard: 1/6
-          - runner_name: "Runner 4"
-            shard: 2/6
-          - runner_name: "Runner 4"
-            shard: 3/6
-          - runner_name: "Runner 4"
-            shard: 5/6
-          - runner_name: "Runner 4"
-            shard: 6/6
-          - runner_name: "Runner 5"
-            shard: 1/6
-          - runner_name: "Runner 5"
-            shard: 2/6
-          - runner_name: "Runner 5"
-            shard: 3/6
-          - runner_name: "Runner 5"
-            shard: 4/6
-          - runner_name: "Runner 5"
-            shard: 6/6
-          - runner_name: "Runner 6"
-            shard: 1/6
-          - runner_name: "Runner 6"
-            shard: 2/6
-          - runner_name: "Runner 6"
-            shard: 3/6
-          - runner_name: "Runner 6"
-            shard: 4/6
-          - runner_name: "Runner 6"
-            shard: 5/6
+            shard: 2/2
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
