@@ -11,8 +11,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner_name: [ "Runner 1", "Runner 2" ]
-        shard: [1/2, 2/2]
         include:
           - runner_name: "Runner 1"
             shard: 1/2
