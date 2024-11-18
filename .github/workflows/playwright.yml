@@ -10,17 +10,11 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - name: Set number of shards
-        id: set-shards
-        run: echo "SHARDS=3" >> $GITHUB_ENV
-
       - name: Generate matrix
         id: set-matrix
         run: |
           SHARDS=${SHARDS:-2}
-          MATRIX=$(seq 1 $SHARDS | jq -c --arg shards "$SHARDS" '{include: [inputs | {runner_name: ("MyRunner " + .), shard: (. + "/" + $shards)}]}')
-          # Remove the extra escaping step
-          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+          echo "matrix=$(seq 1 3 | jq -c -R '{runner_name: [inputs | "MyRunner " + .], shard: [inputs | . + "/3"]}')" >> "$GITHUB_OUTPUT"
 
   playwright-tests:
     needs: generate-matrix 
@@ -28,7 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
+      matrix:
+        runner_name: ${{ fromJson(needs.generate-matrix.outputs.matrix).runner_name }}
+        shard: ${{ fromJson(needs.generate-matrix.outputs.matrix).shard }}
     steps:
       - name: Log matrix
         run: |
