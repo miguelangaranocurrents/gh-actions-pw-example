@@ -5,17 +5,32 @@ on:
   pull_request:
     branches: [main, master]
 jobs:
+  generate-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}  # Pass the generated matrix as an output
+    steps:
+      - name: Set number of shards
+        id: set-shards
+        run: echo "SHARDS=3" >> $GITHUB_ENV  # Change this to the desired number of shards
+
+      - name: Generate matrix
+        id: set-matrix
+        run: |
+          SHARDS=${SHARDS:-2}  # Default to 2 shards if not set
+          MATRIX=$(seq 1 $SHARDS | jq -c '[.[] | {runner_name: ("MyRunner " + tostring), shard: (. + "/" + "'$SHARDS'")}]')
+          echo "matrix=$MATRIX" >> $GITHUB_ENV
+          echo "::set-output name=matrix::$MATRIX"  # Set output for the next job
+        env:
+          SHARDS: ${{ env.SHARDS }}
+
   playwright-tests:
+    needs: generate-matrix 
     timeout-minutes: 60
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - runner_name: "Runner 1"
-            shard: 1/2
-          - runner_name: "Runner 2"
-            shard: 2/2
+      matrix: ${{ fromJSON(needs.generate-matrix.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
