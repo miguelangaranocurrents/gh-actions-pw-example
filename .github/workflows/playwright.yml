@@ -18,7 +18,7 @@ jobs:
         id: set-matrix
         run: |
           SHARDS=${SHARDS:-2}  # Default to 2 shards if not set
-          MATRIX=$(seq 1 $SHARDS | jq -c '[.[] | {runner_name: ("MyRunner " + tostring), shard: (. + "/" + "'$SHARDS'")}]')
+          MATRIX=$(seq 1 $SHARDS | jq -R '[inputs | {runner_name: ("MyRunner " + .), shard: (. + "/" + "'$SHARDS'")}]')
           echo "matrix=$MATRIX" >> $GITHUB_ENV
           echo "::set-output name=matrix::$MATRIX"  # Set output for the next job
         env:
