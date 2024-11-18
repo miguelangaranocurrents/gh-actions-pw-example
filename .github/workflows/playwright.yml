@@ -18,7 +18,7 @@ jobs:
         id: set-matrix
         run: |
           SHARDS=${SHARDS:-2}  # Default to 2 shards if not set
-          MATRIX=$(seq 1 $SHARDS | jq -R -c '[inputs | {runner_name: ("MyRunner " + .), shard: (. + "/" + $SHARDS)}]')
+          MATRIX=$(seq 1 $SHARDS | jq -R -c --arg shards "$SHARDS" '[inputs | {runner_name: ("MyRunner " + .), shard: (. + "/" + $shards)}]')
           # Escape the JSON for GitHub Actions output
           MATRIX_ESCAPED=$(echo "$MATRIX" | jq -c -R .)
           echo "matrix=$MATRIX_ESCAPED" >> "$GITHUB_OUTPUT"
