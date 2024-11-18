@@ -17,11 +17,10 @@ jobs:
       - name: Generate matrix
         id: set-matrix
         run: |
-          SHARDS=${SHARDS:-2}  # Default to 2 shards if not set
-          MATRIX=$(seq 1 $SHARDS | jq -R -c --arg shards "$SHARDS" '{include: [inputs | {runner_name: ("MyRunner " + .), shard: (. + "/" + $shards)}]}')
-          # Escape the JSON for GitHub Actions output
-          MATRIX_ESCAPED=$(echo "$MATRIX" | jq -c -R .)
-          echo "matrix=$MATRIX_ESCAPED" >> "$GITHUB_OUTPUT"
+          SHARDS=${SHARDS:-2}
+          MATRIX=$(seq 1 $SHARDS | jq -c --arg shards "$SHARDS" '{include: [inputs | {runner_name: ("MyRunner " + .), shard: (. + "/" + $shards)}]}')
+          # Remove the extra escaping step
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
 
   playwright-tests:
     needs: generate-matrix 
