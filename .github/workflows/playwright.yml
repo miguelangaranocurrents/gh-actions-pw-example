@@ -18,7 +18,7 @@ jobs:
         id: set-matrix
         run: |
           SHARDS=${SHARDS:-2}  # Default to 2 shards if not set
-          MATRIX=$(seq 1 $SHARDS | jq -R -c --arg shards "$SHARDS" '[inputs | {runner_name: ("MyRunner " + .), shard: (. + "/" + $shards)}]')
+          MATRIX=$(seq 1 $SHARDS | jq -R -c --arg shards "$SHARDS" '{include: [inputs | {runner_name: ("MyRunner " + .), shard: (. + "/" + $shards)}]}')
           # Escape the JSON for GitHub Actions output
           MATRIX_ESCAPED=$(echo "$MATRIX" | jq -c -R .)
           echo "matrix=$MATRIX_ESCAPED" >> "$GITHUB_OUTPUT"
@@ -49,6 +49,3 @@ jobs:
         env:
           CURRENTS_MACHINE_ID: ${{ matrix.runner_name }}
         run: npx pwc --key KPEvZL0LDYzcZH3U --project-id WeZwSj --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard ${{ matrix.shard }}
-
-    # - name: Run commit info
-    #   run: yarn ts-node ./src/commit-info-test.ts
