@@ -12,15 +12,14 @@ jobs:
     steps:
       - name: Set number of shards
         id: set-shards
-        run: echo "SHARDS=3" >> $GITHUB_ENV  # Set the number of shards
+        run: echo "SHARDS=3" >> $GITHUB_ENV
 
       - name: Generate matrix
         id: set-matrix
         run: |
           SHARDS=${SHARDS:-2}  # Default to 2 shards if not set
-          MATRIX=$(seq 1 $SHARDS | jq -R '[inputs | {runner_name: ("MyRunner " + .), shard: (. + "/" + "'$SHARDS'")}]')
-          echo "$MATRIX" > matrix.json
-          echo "matrix=$(cat matrix.json)" >> $GITHUB_ENV
+          MATRIX=$(seq 1 $SHARDS | jq -R '[inputs | {runner_name: ("MyRunner " + .), shard: (. + "/" + env.SHARDS)}]')
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
 
   playwright-tests:
     needs: generate-matrix 
