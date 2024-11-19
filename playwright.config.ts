@@ -1,3 +1,4 @@
+import { CurrentsConfig, currentsReporter } from "@currents/playwright";
 import { defineConfig, devices } from "@playwright/test";
 
 /**
@@ -9,6 +10,12 @@ import { defineConfig, devices } from "@playwright/test";
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
+const currentsConfig: CurrentsConfig = {
+  recordKey: "KPEvZL0LDYzcZH3U", // 📖 https://currents.dev/readme/guides/record-key
+  projectId: "LrO7nE", // get one at https://app.currents.dev
+};
+
 export default defineConfig({
   testDir: "./tests",
   /* Run tests in files in parallel */
@@ -16,11 +23,11 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   // forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: 0,
   /* Opt out of parallel tests on CI. */
   // workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: [currentsReporter(currentsConfig)],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -31,6 +38,7 @@ export default defineConfig({
     video: "on",
     screenshot: "on",
   },
+  outputDir: "test-results/",
 
   /* Configure projects for major browsers */
   projects: [
@@ -39,18 +47,9 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
       metadata: {
         pwc: {
-          tags: ['project:setup']
-        }
-      }
-    },
-    {
-      name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5'] },
-      metadata: {
-        pwc: {
-          tags: ['project:chrome']
-        }
-      }
-    },
+          tags: ["project:setup"],
+        },
+      },
+    }
   ],
 });

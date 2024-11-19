@@ -1,32 +1,54 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 jobs:
+  generate-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Set number of shards
+        id: set-shards
+        run: echo "SHARDS=5" >> $GITHUB_ENV
+
+      - name: Generate matrix
+        id: set-matrix
+        run: |
+          SHARDS=${SHARDS:-2}  # Default to 2 if not set
+          MATRIX="{\"include\":["
+          for i in $(seq 1 $SHARDS); do
+            if [ $i -gt 1 ]; then MATRIX="$MATRIX,"; fi
+            MATRIX="$MATRIX{\"runner_name\":\"MyRunner $i\",\"shard\":\"$i/$SHARDS\"}"
+          done
+          MATRIX="$MATRIX]}"
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
   playwright-tests:
+    needs: generate-matrix 
     timeout-minutes: 60
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        shard: [1/6, 2/6, 3/6, 4/6, 5/6, 6/6]
+      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - name: Log matrix
+        run: |
+          echo "Running on ${{ matrix.runner_name }} with shard ${{ matrix.shard }}"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Install Playwright browsers
-      run: npx playwright install --with-deps
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
-    - name: Install dependencies
-      run: npm install
-    
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run Playwright tests
-      run: npx pwc --key OGzz4AX4DzjE2DSA --project-id UA7nI9 --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard ${{ matrix.shard }}
-
-    # - name: Run commit info
-    #   run: yarn ts-node ./src/commit-info-test.ts
+      - name: Run Playwright tests
+        env:
+          CURRENTS_MACHINE_ID: ${{ matrix.runner_name }}
+        run: npx pwc --key KPEvZL0LDYzcZH3U --project-id WeZwSj --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard ${{ matrix.shard }}

@@ -11,14 +11,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@currents/playwright": "^0.12.1",
     "typescript": "^5.0.2"
   },
   "devDependencies": {
+    "@currents/cmd": "^1.1.2",
+    "@currents/playwright": "^1.6.2",
     "@playwright/experimental-ct-react": "^1.42.0",
-    "@playwright/test": "^1.38.1",
+    "@playwright/test": "^1.48.2",
     "@types/node": "^20.8.2",
-    "playwright": "^1.38.1",
+    "playwright": "^1.48.2",
     "ts-node": "^10.9.2"
+  },
+  "overrides": {
+    "@playwright/test": "^1.48.2",
+    "playwright": "^1.48.2"
   }
 }
