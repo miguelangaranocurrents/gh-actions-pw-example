@@ -8,10 +8,6 @@ jobs:
   playwright-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: [1/6, 2/6, 3/6, 4/6, 5/6, 6/6]
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -26,7 +22,7 @@ jobs:
     
 
     - name: Run Playwright tests
-      run: npx pwc --key OGzz4AX4DzjE2DSA --project-id UA7nI9 --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}} --shard ${{ matrix.shard }}
+      run: CURRENTS_API_URL=https://cy-staging.currents.dev npx pwc --key AcceNBS8GCEFdr4C --project-id ghc2jY --ci-build-id ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt}}
 
     # - name: Run commit info
     #   run: yarn ts-node ./src/commit-info-test.ts

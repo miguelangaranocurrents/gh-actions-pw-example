@@ -1,32 +1,13 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
-test.describe(() => {
-  test("has title", async ({ page }, testInfo) => {
-    await page.goto("https://playwright.dev/");
+test("basic test @basic", async ({ page }) => {
+  await page.goto("https://todomvc.com/examples/backbone/dist/");
 
-    // Expect a title "to contain" a substring.
-    const screenshot = await page.screenshot();
-    await testInfo.attach("screenshot", {
-      body: screenshot,
-      contentType: "image/png",
-    });
-    const screenshot1 = await page.screenshot();
-    await testInfo.attach("screenshot1", {
-      body: screenshot,
-      contentType: "image/png",
-    });
-    await expect(page).toHaveTitle(/Playwright/);
-  });
+  // Use locators to represent a selector and re-use them
+  const inputBox = page.locator("input.new-todo");
+  const todoList = page.locator(".todo-list");
 
-  test("get started link", async ({ page }) => {
-    await page.goto("https://playwright.dev/");
-
-    // Click the get started link.
-    await page.getByRole("link", { name: "Get started" }).click();
-
-    // Expects page to have a heading with the name of Installation.
-    await expect(
-      page.getByRole("heading", { name: "Installation" })
-    ).toBeVisible();
-  });
+  await inputBox.fill("Learn Playwright");
+  await inputBox.press("Enter");
+  await expect(todoList).toHaveText("Learn Playwright");
 });
