@@ -20,7 +20,7 @@ jobs:
       - name: Run Playwright Test
         env:
           CURRENTS_PROJECT_ID: dvOKVh
-          CURRENTS_API_KEY: mykey
+          CURRENTS_RECORD_KEY: mykey
         run: |
           echo "The Current Project ID is $CURRENTS_PROJECT_ID and $CURRENTS_RECORD_KEY"
           npx pwc
