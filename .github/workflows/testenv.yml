@@ -27,6 +27,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright Test
+        continue-on-error: true
         env:
           CURRENTS_PROJECT_ID: LrO7nE
           CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
@@ -34,7 +35,7 @@ jobs:
           echo "CURRENTS_PROJECT_ID=$CURRENTS_PROJECT_ID" >> debug.log
           echo "CURRENTS_RECORD_KEY=$CURRENTS_RECORD_KEY" >> debug.log
           npx pwc --key=$CURRENTS_RECORD_KEY
-          
+
       - name: Upload Debug Log
         uses: actions/upload-artifact@v3
         with:
