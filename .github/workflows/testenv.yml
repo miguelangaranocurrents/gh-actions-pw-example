@@ -1,0 +1,34 @@
+name: Playwright Front End Test
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 21
+
+      - uses: browser-actions/setup-chrome@v1
+
+      - run: chrome --version
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Browser
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright Test
+        env:
+          CURRENTS_PROJECT_ID: dvOKVh
+          CURRENTS_RECORD_KEY: mykey
+        run: |
+          echo "The Current Project ID is $CURRENTS_PROJECT_ID"
+          npx pwc --key $CURRENTS_RECORD_KEY --project-id $CURRENTS_PROJECT_ID
