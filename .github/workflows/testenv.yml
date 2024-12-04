@@ -17,18 +17,9 @@ jobs:
 
       - uses: browser-actions/setup-chrome@v1
 
-      - run: chrome --version
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Install Playwright Browser
-        run: npx playwright install --with-deps
-
       - name: Run Playwright Test
         env:
           CURRENTS_PROJECT_ID: dvOKVh
           CURRENTS_RECORD_KEY: mykey
         run: |
-          echo "The Current Project ID is $CURRENTS_PROJECT_ID"
-          npx pwc --key $CURRENTS_RECORD_KEY --project-id $CURRENTS_PROJECT_ID
+          echo "The Current Project ID is $CURRENTS_PROJECT_ID and $CURRENTS_RECORD_KEY"
