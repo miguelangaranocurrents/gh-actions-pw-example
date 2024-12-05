@@ -42,15 +42,6 @@ export default defineConfig({
           tags: ['project:setup']
         }
       }
-    },
-    {
-      name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5'] },
-      metadata: {
-        pwc: {
-          tags: ['project:chrome']
-        }
-      }
-    },
+    }
   ],
 });
