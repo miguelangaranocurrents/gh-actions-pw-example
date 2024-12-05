@@ -21,7 +21,7 @@ jobs:
       - run: chrome --version
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Install Playwright Browser
         run: npx playwright install --with-deps
