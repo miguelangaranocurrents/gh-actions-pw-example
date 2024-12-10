@@ -6,33 +6,8 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Url of the Environment to run the tests'
-        required: true
-        default: 'https://staging.blackbirdailabs.com/'
-        type: choice
-        options:
-          - https://staging.blackbirdailabs.com/
-          - https://preprod.blackbirdailabs.com/
-          - https://constellation.blackbird.ai/
-          - https://demo.blackbirdailabs.com/
-          - https://dev.infra.blackbird.ai/
-      commit:
-        description: 'Commit that triggered the tests'
-        required: false
-        default: 'sandbox'
-        type: string
+
   workflow_call:
-    inputs:
-      environment:
-        description: 'Url of the Environment to run the tests'
-        required: true
-        type: string
-      commit:
-        description: 'Commit that triggered the tests'
-        required: false
-        type: string
 
 jobs:
   run-tests:
