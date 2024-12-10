@@ -5,10 +5,6 @@ on:
 
 jobs:
   test-or8n:
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: [1, 2, 3]
     timeout-minutes: 60
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/playwright:latest
