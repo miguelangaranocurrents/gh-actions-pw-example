@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/playwright:latest
     env:
-      CURRENTS_PROJECT_ID: bnsqNa
+      CURRENTS_PROJECT_ID: 1sIRzu
       CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_1 }}
       CURRENTS_CI_BUILD_ID: ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
       CURRENTS_API_KEY: ${{ secrets.CURRENTS_API_KEY_1 }}
