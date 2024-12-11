@@ -1,6 +1,9 @@
 name: API TEST RUNNER
 
 on:
+  push: 
+    branches:
+      - main
   schedule:
     - cron: '0 6 * * *'
   pull_request:
