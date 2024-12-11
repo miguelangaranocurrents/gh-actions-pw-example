@@ -5,6 +5,7 @@ on:
 
 jobs:
   test-or8n:
+    environment: test
     timeout-minutes: 60
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/playwright:latest
