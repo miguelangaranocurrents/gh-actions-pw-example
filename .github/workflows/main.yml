@@ -35,7 +35,7 @@ jobs:
           previous-ci-build-id: RoseRocket/platform-components-12263541876-1
           pw-output-dir: playwright
       - name: Playwright Tests
-        working-directory: ./basic
+        working-directory: ./playwright
         run: |
           echo "Outputs: ${{ toJson(steps.last-failed-action.outputs) }}"
           COMMAND="npx pwc-p ${{ steps.last-failed-action.outputs.extra-pw-flags }}"
