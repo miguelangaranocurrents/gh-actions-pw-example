@@ -37,4 +37,4 @@ jobs:
         shell: bash
         run: |
           echo "DATA=${{ github.event.head_commit.message }} ${{ github.event.pull_request.head.sha }} ${{ env.COMMIT_INFO_AUTHOR }}"
-          cat $GITHUB_EVENT_PATH | jq .
+          cat $GITHUB_EVENT_PATH
