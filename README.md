@@ -1,3 +1,5 @@
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=currents&config=eyJuYW1lIjoiQ3VycmVudHMiLCJkZXNjcmlwdGlvbiI6IkN1cnJlbnRzIE1DUCBzZXJ2ZXIiLCJjb21tYW5kIjoibnB4IC15IEBjdXJyZW50cy9tY3BAMS4wLjIiLCJlbnYiOnsiQ1VSUkVOVFNfQVBJX0tFWSI6InlvdXItY3VycmVudHMtYXBpLWtleSJ9fQ==)
+
 # Currents.dev - GitHub Actions Playwright Example
 
 This is an example repository that showcases using [Currents.dev](https://currents.dev) for running Playwright tests on GitHub Actions.
