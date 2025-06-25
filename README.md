@@ -1,4 +1,4 @@
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=currents&config=eyJuYW1lIjoiQ3VycmVudHMiLCJkZXNjcmlwdGlvbiI6IkN1cnJlbnRzIE1DUCBzZXJ2ZXIiLCJjb21tYW5kIjoibnB4IC15IEBjdXJyZW50cy9tY3BAMS4wLjIiLCJlbnYiOnsiQ1VSUkVOVFNfQVBJX0tFWSI6InlvdXItY3VycmVudHMtYXBpLWtleSJ9fQ==)
+<a href="https://cursor.com/install-mcp?name=currents&config=eyJuYW1lIjoiQ3VycmVudHMiLCJkZXNjcmlwdGlvbiI6IkN1cnJlbnRzIE1DUCBzZXJ2ZXIiLCJjb21tYW5kIjoibnB4IC15IEBjdXJyZW50cy9tY3BAMS4wLjIiLCJlbnYiOnsiQ1VSUkVOVFNfQVBJX0tFWSI6InlvdXItY3VycmVudHMtYXBpLWtleSJ9fQ%3D%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add currents MCP server to Cursor" height="32" /></a>
 
 # Currents.dev - GitHub Actions Playwright Example
 
