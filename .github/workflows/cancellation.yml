@@ -1,0 +1,47 @@
+name: failed-only-or8n-cancellation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-or8n:
+    environment: test
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:latest
+    env:
+      CURRENTS_PROJECT_ID: 1sIRzu
+      CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_1 }}
+      CURRENTS_CI_BUILD_ID: ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+      CURRENTS_API_KEY: ${{ secrets.CURRENTS_API_KEY_1 }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - run: |
+          echo "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+      - name: Playwright Tests
+        working-directory: ./playwright
+        run: |
+          COMMAND="npx pwc"
+          echo "Running command: $COMMAND"
+
+  cancel-currents:
+    name: Cancel Currents if workflow is cancelled
+    needs: [test-or8n]
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+      - name: Cancel Currents run if the workflow is cancelled
+        if: ${{ cancelled() }}
+        uses: miguelangaranocurrents/cancel-run-gh-action@feat/allow-cibuildid-param
+        with:
+          api-token: ${{ secrets.CURRENTS_API_KEY_1 }}
+          github-run-id: ${{ github.run_id }}
+          github-run-attempt: ${{ github.run_attempt }}
+          project-id: ${{ env.CURRENTS_PROJECT_ID }}
+          ci-build-id: ${{ env.CURRENTS_CI_BUILD_ID }}
