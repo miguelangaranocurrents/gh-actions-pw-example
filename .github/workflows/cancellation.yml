@@ -12,7 +12,7 @@ jobs:
     env:
       CURRENTS_PROJECT_ID: 1sIRzu
       CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_1 }}
-      CURRENTS_CI_BUILD_ID: ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+      CURRENTS_CI_BUILD_ID: ${{ github.repository }}-${{ github.run_id }}-
       CURRENTS_API_KEY: ${{ secrets.CURRENTS_API_KEY_1 }}
     steps:
       - uses: actions/checkout@v4
@@ -26,18 +26,11 @@ jobs:
           node-version: "20.x"
       - name: Playwright Tests
         working-directory: ./playwright
+        continue-on-error: true
         run: |
           COMMAND="npx pwc"
           echo "Running command: $COMMAND"
-
-  cancel-currents:
-    name: Cancel Currents if workflow is cancelled
-    needs: [test-or8n]
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    steps:
       - name: Cancel Currents run if the workflow is cancelled
-        if: ${{ cancelled() }}
         uses: miguelangaranocurrents/cancel-run-gh-action@feat/allow-cibuildid-param
         with:
           api-token: ${{ secrets.CURRENTS_API_KEY_1 }}
