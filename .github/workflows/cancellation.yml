@@ -12,7 +12,7 @@ jobs:
     env:
       CURRENTS_PROJECT_ID: MECpA5
       CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY_1 }}
-      CURRENTS_CI_BUILD_ID: ${{ github.repository }}-${{ github.run_id }}-
+      CURRENTS_CI_BUILD_ID: ${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
       CURRENTS_API_KEY: ${{ secrets.CURRENTS_API_KEY_1 }}
     steps:
       - uses: actions/checkout@v4
