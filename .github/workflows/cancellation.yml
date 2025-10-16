@@ -1,4 +1,4 @@
-name: failed-only-or8n-cancellation
+name: or8n-cancellation
 
 on:
   workflow_dispatch:
